@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Data\PositionData;
 use App\Data\PositionDataBuilder;
-use App\Enums\RoverDirection;
+use App\Enums\Direction;
 use App\Models\PositionModel;
 
 /**
@@ -37,18 +37,18 @@ class PositionRepository implements ReadRepositoryInterface, WriteRepositoryInte
     private function convertDataToModel(PositionData $positionData): PositionModel
     {
         return new PositionModel([
-            'point_x' => $positionData->pointX,
-            'point_y' => $positionData->pointY,
-            'rover_direction' => RoverDirection::getValue($positionData->roverDirection),
+            'x' => $positionData->x,
+            'y' => $positionData->y,
+            'direction' => $positionData->direction->value,
         ]);
     }
 
     private function convertModelToData(PositionModel $positionModel): PositionData
     {
         return (new PositionDataBuilder())
-            ->setPointX($positionModel['point_x'])
-            ->setPointY($positionModel['point_y'])
-            ->setRoverDirection(RoverDirection::getEnum($positionModel['rover_direction']))
+            ->setPointX($positionModel['x'])
+            ->setPointY($positionModel['y'])
+            ->setDirection(Direction::getEnum($positionModel['direction']))
             ->build();
     }
 

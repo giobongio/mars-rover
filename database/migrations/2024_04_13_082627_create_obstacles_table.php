@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('obstacles', function (Blueprint $table) {
             $table->id();
-            $table->integer('point_x');
-            $table->integer('point_y');
+            $table->integer('x');
+            $table->integer('y');
         });
     }
 

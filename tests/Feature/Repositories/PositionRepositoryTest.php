@@ -3,7 +3,7 @@
 namespace Tests\Feature\Repositories;
  
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use App\Enums\RoverDirection;
+use App\Enums\Direction;
 use App\Repositories\PositionRepository;
 use App\Data\PositionData;
 use Tests\TestCase;
@@ -14,14 +14,14 @@ class PositionRepositoryTest extends TestCase
  
     public function test_savePositionData_getSamePositionData(): void
     {
-        $pointX = 200;
-        $pointY = 300;
-        $roverDirection = RoverDirection::WEST;
+        $x = 200;
+        $y = 300;
+        $direction = Direction::WEST;
 
         $positionData = new PositionData(
-            $pointX,
-            $pointY,
-            $roverDirection
+            $x,
+            $y,
+            $direction
         );
 
         $positionRepository = new PositionRepository();
@@ -33,14 +33,14 @@ class PositionRepositoryTest extends TestCase
  
     public function test_deletePositionData_getNull(): void
     {
-        $pointX = 200;
-        $pointY = 300;
-        $roverDirection = RoverDirection::WEST;
+        $x = 200;
+        $y = 300;
+        $direction = Direction::WEST;
 
         $positionData = new PositionData(
-            $pointX,
-            $pointY,
-            $roverDirection
+            $x,
+            $y,
+            $direction
         );
 
         $positionRepository = new PositionRepository();
@@ -48,6 +48,6 @@ class PositionRepositoryTest extends TestCase
         $positionRepository->delete(1);
 
         $actualData = $positionRepository->get(1);
-        $this->assertEquals(null, $actualData);
+        $this->assertEmpty($actualData);
     }
 }

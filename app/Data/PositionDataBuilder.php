@@ -2,52 +2,52 @@
 
 namespace App\Data;
 
-use App\Enums\RoverDirection;
+use App\Enums\Direction;
 use App\Data\PositionData;
 use InvalidArgumentException;
 
 class PositionDataBuilder
 {
-    private int $pointX = 0;
-    private int $pointY = 0;
-    private RoverDirection $roverDirection;
+    private int $x = 0;
+    private int $y = 0;
+    private Direction $direction;
 
-    public function setPointX(int $pointX): PositionDataBuilder
+    public function setPointX(int $x): PositionDataBuilder
     {
-        $this->pointX = $pointX;
+        $this->x = $x;
         return $this;
     }
 
-    public function setPointY(int $pointY): PositionDataBuilder
+    public function setPointY(int $y): PositionDataBuilder
     {
-        $this->pointY = $pointY;
+        $this->y = $y;
         return $this;
     }
 
-    public function setRoverDirection(RoverDirection $roverDirection): PositionDataBuilder
+    public function setDirection(Direction $direction): PositionDataBuilder
     {
-        $this->roverDirection = $roverDirection;
+        $this->direction = $direction;
         return $this;
     }
 
     public function build(): PositionData
     {
-        if ($this->pointX <= 0) {
+        if ($this->x <= 0) {
             throw new InvalidArgumentException('Point X is invalid');
         }
 
-        if ($this->pointY <= 0) {
+        if ($this->y <= 0) {
             throw new InvalidArgumentException('Point Y is invalid');
         }
 
-        if (empty($this->roverDirection)) {
+        if (empty($this->direction)) {
             throw new InvalidArgumentException('Rover direction is invalid');
         }
 
         return new PositionData(
-            $this->pointX,
-            $this->pointY,
-            $this->roverDirection,
+            $this->x,
+            $this->y,
+            $this->direction,
         );
     }
 }

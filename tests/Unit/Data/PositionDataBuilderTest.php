@@ -3,95 +3,95 @@
 namespace Tests\Unit\Data;
 
 use App\Data\PositionDataBuilder;
-use App\Enums\RoverDirection;
+use App\Enums\Direction;
 use InvalidArgumentException;
 use Tests\TestCase;
 
 class PositionDataBuilderTest extends TestCase
 {
-    public function test_pointXInvalid_throwsInvalidArgumentException(): void
+    public function test_xInvalid_throwsInvalidArgumentException(): void
     {
-        $pointX = -1;
-        $pointY = 30;
-        $roverDirection = RoverDirection::WEST;
+        $x = -1;
+        $y = 30;
+        $direction = Direction::WEST;
 
         $this->expectException(InvalidArgumentException::class);
 
         $positionData = (new PositionDataBuilder())
-            ->setPointX($pointX)
-            ->setPointY($pointY)
-            ->setRoverDirection($roverDirection)
+            ->setPointX($x)
+            ->setPointY($y)
+            ->setDirection($direction)
             ->build();
     }
 
-    public function test_pointXMissing_throwsInvalidArgumentException(): void
+    public function test_xMissing_throwsInvalidArgumentException(): void
     {
-        $pointY = 30;
-        $roverDirection = RoverDirection::WEST;
+        $y = 30;
+        $direction = Direction::WEST;
 
         $this->expectException(InvalidArgumentException::class);
 
         $positionData = (new PositionDataBuilder())
-            ->setPointY($pointY)
-            ->setRoverDirection($roverDirection)
+            ->setPointY($y)
+            ->setDirection($direction)
             ->build();
     }
 
-    public function test_pointYInvalid_throwsInvalidArgumentException(): void
+    public function test_yInvalid_throwsInvalidArgumentException(): void
     {
-        $pointX = 20;
-        $pointY = -1;
-        $roverDirection = RoverDirection::WEST;
+        $x = 20;
+        $y = -1;
+        $direction = Direction::WEST;
 
         $this->expectException(InvalidArgumentException::class);
 
         $positionData = (new PositionDataBuilder())
-            ->setPointX($pointX)
-            ->setPointY($pointY)
-            ->setRoverDirection($roverDirection)
+            ->setPointX($x)
+            ->setPointY($y)
+            ->setDirection($direction)
             ->build();
     }
 
-    public function test_pointYMissing_throwsInvalidArgumentException(): void
+    public function test_yMissing_throwsInvalidArgumentException(): void
     {
-        $pointX = 20;
-        $roverDirection = RoverDirection::WEST;
+        $x = 20;
+        $direction = Direction::WEST;
 
         $this->expectException(InvalidArgumentException::class);
 
         $positionData = (new PositionDataBuilder())
-            ->setPointX($pointX)
-            ->setRoverDirection($roverDirection)
+            ->setPointX($x)
+            ->setDirection($direction)
             ->build();
     }
 
-    public function test_roverDirectionMissing_throwsInvalidArgumentException(): void
+    public function test_directionMissing_throwsInvalidArgumentException(): void
     {
-        $pointX = 20;
-        $pointY = 30;
+        $x = 20;
+        $y = 30;
 
         $this->expectException(InvalidArgumentException::class);
 
         $positionData = (new PositionDataBuilder())
-            ->setPointX($pointX)
-            ->setPointY($pointY)
+            ->setPointX($x)
+            ->setPointY($y)
             ->build();
     }
 
     public function test_allDataValid_correctPositionDataCreated(): void
     {
-        $pointX = 20;
-        $pointY = 30;
-        $roverDirection = RoverDirection::WEST;
+        $x = 20;
+        $y = 30;
+        $direction = Direction::WEST;
 
         $positionData = (new PositionDataBuilder())
-            ->setPointX($pointX)
-            ->setPointY($pointY)
-            ->setRoverDirection($roverDirection)
+            ->setPointX($x)
+            ->setPointY($y)
+            ->setDirection($direction)
             ->build();
 
-        $this->assertEquals($pointX, $positionData->pointX);
-        $this->assertEquals($pointY, $positionData->pointY);
-        $this->assertEquals($roverDirection, $positionData->roverDirection);
+        $this->assertEquals($x, $positionData->x);
+        $this->assertEquals($y, $positionData->y);
+        $this->assertEquals($direction, $positionData->direction);
     }
 }

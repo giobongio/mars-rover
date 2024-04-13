@@ -3,24 +3,24 @@
 namespace Tests\Unit\Data;
 
 use App\Data\PositionData;
-use App\Enums\RoverDirection;
+use App\Enums\Direction;
 use Tests\TestCase;
 
 class PositionDataTest extends TestCase
 {
     public function test_serialize_outputSerializedData(): void
     {
-        $pointX = 20;
-        $pointY = 30;
-        $roverDirection = RoverDirection::WEST;
+        $x = 20;
+        $y = 30;
+        $direction = Direction::WEST;
 
         $positionData = new PositionData(
-            $pointX,
-            $pointY,
-            $roverDirection
+            $x,
+            $y,
+            $direction
         );
 
-        $expectedPositionData = '{"pointX":' . $pointX . ',"pointY":' . $pointY . ',"roverDirection":"' . RoverDirection::getValue($roverDirection) . '"}';
+        $expectedPositionData = '{"x":' . $x . ',"y":' . $y . ',"direction":"' . $direction->value . '"}';
         $this->assertEquals($expectedPositionData, $positionData->jsonSerialize());
     }
 }

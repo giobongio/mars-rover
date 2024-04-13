@@ -12,8 +12,8 @@ class PositionModel extends Model
     protected $table = 'positions';
 
     protected $fillable = [
-        'point_x',
-        'point_y',
-        'rover_direction',
+        'x',
+        'y',
+        'direction',
     ];
 }

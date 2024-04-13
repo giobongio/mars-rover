@@ -2,15 +2,15 @@
 
 namespace App\Data;
 
-use App\Enums\RoverDirection;
+use App\Enums\Direction;
 use JsonSerializable;
 
 class PositionData implements JsonSerializable
 {
     public function __construct(
-        public readonly int $pointX,
-        public readonly int $pointY,
-        public readonly RoverDirection $roverDirection,
+        public readonly int $x,
+        public readonly int $y,
+        public readonly Direction $direction,
     ) {
     }
 
