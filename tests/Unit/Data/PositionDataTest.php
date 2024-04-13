@@ -1,17 +1,18 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Unit\Data;
 
 use App\Data\PositionData;
+use App\Enums\RoverDirection;
 use Tests\TestCase;
 
 class PositionDataTest extends TestCase
 {
-    public function test_serialize_outputSerializedData()
+    public function test_serialize_outputSerializedData(): void
     {
         $pointX = 20;
         $pointY = 30;
-        $roverDirection = "W";
+        $roverDirection = RoverDirection::WEST;
 
         $positionData = new PositionData(
             $pointX,
@@ -19,7 +20,7 @@ class PositionDataTest extends TestCase
             $roverDirection
         );
 
-        $expectedPositionData = '{"pointX":' . $pointX . ',"pointY":' . $pointY . ',"roverDirection":"' . $roverDirection . '"}';
+        $expectedPositionData = '{"pointX":' . $pointX . ',"pointY":' . $pointY . ',"roverDirection":"' . RoverDirection::getValue($roverDirection) . '"}';
         $this->assertEquals($expectedPositionData, $positionData->jsonSerialize());
     }
 }

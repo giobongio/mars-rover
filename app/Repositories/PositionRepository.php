@@ -39,7 +39,7 @@ class PositionRepository implements ReadRepositoryInterface, WriteRepositoryInte
         return new PositionModel([
             'point_x' => $positionData->pointX,
             'point_y' => $positionData->pointY,
-            'rover_direction' => $positionData->roverDirection,
+            'rover_direction' => RoverDirection::getValue($positionData->roverDirection),
         ]);
     }
 
@@ -48,7 +48,7 @@ class PositionRepository implements ReadRepositoryInterface, WriteRepositoryInte
         return (new PositionDataBuilder())
             ->setPointX($positionModel['point_x'])
             ->setPointY($positionModel['point_y'])
-            ->setRoverDirection($positionModel['rover_direction'])
+            ->setRoverDirection(RoverDirection::getEnum($positionModel['rover_direction']))
             ->build();
     }
 

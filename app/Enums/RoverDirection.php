@@ -9,22 +9,12 @@ enum RoverDirection: string
     case EAST = "E";
     case WEST = "W";
 
-    public static function isValid(mixed $value): bool
+    public static function isValid(string $value): bool
     {
-        if (!is_string($value)) {
-            return false;
-        }
-
-        return match ($value) {
-            (self::NORTH)->value,
-            (self::SOUTH)->value,
-            (self::EAST)->value,
-            (self::WEST)->value => true,
-            default => false,
-        };
+        return !empty(self::getEnum($value));
     }
 
-    public static function getValueFromName(string $name): ?int
+    /*public static function getValueFromName(string $name): ?int
     {
         foreach (self::cases() as $roverDirection) {
             if ($name === $roverDirection->name) {
@@ -40,6 +30,27 @@ enum RoverDirection: string
         foreach (self::cases() as $roverDirection) {
             if ($value === $roverDirection->value) {
                 return $roverDirection->name;
+            }
+        }
+
+        return null;
+    }*/
+
+    public static function getValue(RoverDirection $roverDirection): ?string
+    {
+        return self::isValid($roverDirection->value) ? $roverDirection->value : null;
+    }
+
+    public static function getName(RoverDirection $roverDirection): ?string
+    {
+        return self::isValid($roverDirection->value) ? $roverDirection->name : null;
+    }
+
+    public static function getEnum(string $value): ?RoverDirection
+    {
+        foreach (self::cases() as $roverDirection) {
+            if ($value === $roverDirection->value) {
+                return $roverDirection;
             }
         }
 

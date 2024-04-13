@@ -3,8 +3,9 @@
 namespace App\Controllers\v1;
 
 use App\Controllers\Controller;
-use App\Repositories\PositionRepository;
 use App\Data\PositionData;
+use App\Enums\RoverDirection;
+use App\Repositories\PositionRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -25,7 +26,7 @@ class PositionController extends Controller
 
         $pointX = 20;
         $pointY = 30;
-        $roverDirection = "W";
+        $roverDirection = RoverDirection::WEST;
 
         $positionData = new PositionData(
             $pointX,
