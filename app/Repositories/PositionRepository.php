@@ -30,12 +30,7 @@ class PositionRepository implements ReadRepositoryInterface, WriteRepositoryInte
      */
     public function save($positionData): void
     {
-        $positionModel = PositionModel::find($positionData->id);
-
-        if (!$positionModel || !$positionModel->exists) {
-            $positionModel = $this->convertDataToModel($positionData);
-        }
-
+        $positionModel = $this->convertDataToModel($positionData);
         $positionModel->save();
     }
 
@@ -53,7 +48,7 @@ class PositionRepository implements ReadRepositoryInterface, WriteRepositoryInte
         return (new PositionDataBuilder())
             ->setPointX($positionModel['point_x'])
             ->setPointY($positionModel['point_y'])
-            ->setRoverDirection(RoverDirection::getNameFromValue($positionModel['rover_direction']))
+            ->setRoverDirection($positionModel['rover_direction'])
             ->build();
     }
 

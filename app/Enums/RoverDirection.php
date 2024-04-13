@@ -15,7 +15,7 @@ enum RoverDirection: string
             return false;
         }
 
-        return match ((int)$value) {
+        return match ($value) {
             (self::NORTH)->value,
             (self::SOUTH)->value,
             (self::EAST)->value,
@@ -35,7 +35,7 @@ enum RoverDirection: string
         return null;
     }
 
-    public static function getNameFromValue(int $value): ?string
+    public static function getNameFromValue(string $value): ?string
     {
         foreach (self::cases() as $roverDirection) {
             if ($value === $roverDirection->value) {

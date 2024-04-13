@@ -9,6 +9,8 @@ class PositionModel extends Model
 {
     use HasFactory;
 
+    protected $table = 'positions';
+
     protected $fillable = [
         'point_x',
         'point_y',

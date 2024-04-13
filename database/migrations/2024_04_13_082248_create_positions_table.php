@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('point_x');
             $table->integer('point_y');
-            $table->integer('rover_direction');
+            $table->string('rover_direction');
             $table->timestamps();
         });
     }

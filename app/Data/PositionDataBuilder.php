@@ -24,7 +24,7 @@ class PositionDataBuilder
         return $this;
     }
 
-    public function setRoverDirection(int $roverDirection): PositionDataBuilder
+    public function setRoverDirection(string $roverDirection): PositionDataBuilder
     {
         $this->roverDirection = $roverDirection;
         return $this;
@@ -40,8 +40,7 @@ class PositionDataBuilder
             throw new InvalidArgumentException('Point Y is invalid');
         }
 
-        $roverDirectionValue = RoverDirection::getValueFromName($this->roverDirection);
-        if (!RoverDirection::isValid($roverDirectionValue)) {
+        if (!RoverDirection::isValid($this->roverDirection)) {
             throw new InvalidArgumentException('Rover direction is invalid');
         }
 
