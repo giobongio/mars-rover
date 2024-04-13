@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace App\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => 'Giorgio',
-            'email' => 'admin@codiceplastico.com',
+            'email' => 'giorgio@marsrover.com',
             'password' => Hash::make('password'),
         ]);
     }
