@@ -23,6 +23,14 @@ class DirectionTest extends TestCase
         $this->assertEquals($expectedDirection, $direction);
     }
 
+    public function test_validValueLowercase_getCorrectEnum(): void
+    {
+        $expectedDirection = Direction::WEST;
+        
+        $direction = Direction::getEnum(strtolower($expectedDirection->value));
+        $this->assertEquals($expectedDirection, $direction);
+    }
+
     public function test_invalidValue_isInvalid(): void
     {
         $value = "X";

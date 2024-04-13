@@ -17,7 +17,7 @@ enum Direction: string
     public static function getEnum(string $value): ?Direction
     {
         foreach (self::cases() as $direction) {
-            if ($value === $direction->value) {
+            if (strtolower($value) === strtolower($direction->value)) {
                 return $direction;
             }
         }

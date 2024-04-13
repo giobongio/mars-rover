@@ -46,8 +46,8 @@ class PositionRepository implements ReadRepositoryInterface, WriteRepositoryInte
     private function convertModelToData(PositionModel $positionModel): PositionData
     {
         return (new PositionDataBuilder())
-            ->setPointX($positionModel['x'])
-            ->setPointY($positionModel['y'])
+            ->setX($positionModel['x'])
+            ->setY($positionModel['y'])
             ->setDirection(Direction::getEnum($positionModel['direction']))
             ->build();
     }

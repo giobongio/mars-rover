@@ -6,6 +6,7 @@ use App\Controllers\Controller;
 use App\Data\PositionData;
 use App\Enums\Direction;
 use App\Repositories\PositionRepository;
+use App\Repositories\ObstacleRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -18,7 +19,7 @@ class PositionController extends Controller
     */
     public function move(Request $request): Response
     {
-        $body = [
+        /*$body = [
             'name' => 'Abigail',
             'state' => 'CA',
             'zip' => 29121,
@@ -36,8 +37,12 @@ class PositionController extends Controller
 
         $positionRepository = new PositionRepository();
         $positionRepository->save($positionData);
-        $foo = $positionRepository->get(1);
+        $foo = $positionRepository->get(1);*/
 
+        /*$obstacleRepository = new ObstacleRepository();
+        $foo = $obstacleRepository->getAll();*/
+
+        $body = 'foo';
         return Response($body, Response::HTTP_OK);
     }
 }

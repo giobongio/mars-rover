@@ -123,4 +123,31 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+
+    /*
+    |--------------------------------------------------------------------------
+    | Planisphere grid definition
+    |--------------------------------------------------------------------------
+    |
+    | These configuration options determine the planisphere grid definition
+    |
+    */
+
+    'planisphere' => [
+        'total_parallels' => 20,
+        'total_meridians' => 10,
+    ],
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Total number of obstacles
+    |--------------------------------------------------------------------------
+    |
+    | These configuration options determine the planisphere grid definition
+    |
+    */
+
+    'total_obstacles' => 10,
+
 ];

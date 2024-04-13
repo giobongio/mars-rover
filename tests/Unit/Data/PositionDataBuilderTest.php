@@ -18,8 +18,8 @@ class PositionDataBuilderTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
 
         $positionData = (new PositionDataBuilder())
-            ->setPointX($x)
-            ->setPointY($y)
+            ->setX($x)
+            ->setY($y)
             ->setDirection($direction)
             ->build();
     }
@@ -32,7 +32,7 @@ class PositionDataBuilderTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
 
         $positionData = (new PositionDataBuilder())
-            ->setPointY($y)
+            ->setY($y)
             ->setDirection($direction)
             ->build();
     }
@@ -46,8 +46,8 @@ class PositionDataBuilderTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
 
         $positionData = (new PositionDataBuilder())
-            ->setPointX($x)
-            ->setPointY($y)
+            ->setX($x)
+            ->setY($y)
             ->setDirection($direction)
             ->build();
     }
@@ -60,7 +60,7 @@ class PositionDataBuilderTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
 
         $positionData = (new PositionDataBuilder())
-            ->setPointX($x)
+            ->setX($x)
             ->setDirection($direction)
             ->build();
     }
@@ -73,8 +73,8 @@ class PositionDataBuilderTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
 
         $positionData = (new PositionDataBuilder())
-            ->setPointX($x)
-            ->setPointY($y)
+            ->setX($x)
+            ->setY($y)
             ->build();
     }
 
@@ -85,8 +85,8 @@ class PositionDataBuilderTest extends TestCase
         $direction = Direction::WEST;
 
         $positionData = (new PositionDataBuilder())
-            ->setPointX($x)
-            ->setPointY($y)
+            ->setX($x)
+            ->setY($y)
             ->setDirection($direction)
             ->build();
 

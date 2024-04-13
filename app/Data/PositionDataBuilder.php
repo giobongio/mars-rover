@@ -12,13 +12,13 @@ class PositionDataBuilder
     private int $y = 0;
     private Direction $direction;
 
-    public function setPointX(int $x): PositionDataBuilder
+    public function setX(int $x): PositionDataBuilder
     {
         $this->x = $x;
         return $this;
     }
 
-    public function setPointY(int $y): PositionDataBuilder
+    public function setY(int $y): PositionDataBuilder
     {
         $this->y = $y;
         return $this;
@@ -32,16 +32,16 @@ class PositionDataBuilder
 
     public function build(): PositionData
     {
-        if ($this->x <= 0) {
-            throw new InvalidArgumentException('Point X is invalid');
+        if ($this->x < 0 || $this->x >= config('app.planisphere.total_meridians')) {
+            throw new InvalidArgumentException('Position X is invalid');
         }
 
-        if ($this->y <= 0) {
-            throw new InvalidArgumentException('Point Y is invalid');
+        if ($this->y < 0 || $this->y >= config('app.planisphere.total_parallels')) {
+            throw new InvalidArgumentException('Position Y is invalid');
         }
 
         if (empty($this->direction)) {
-            throw new InvalidArgumentException('Rover direction is invalid');
+            throw new InvalidArgumentException('Direction is invalid');
         }
 
         return new PositionData(
