@@ -8,9 +8,9 @@ use JsonSerializable;
 class PositionData implements JsonSerializable
 {
     public function __construct(
-        public readonly int $x,
-        public readonly int $y,
-        public readonly Direction $direction,
+        public int $x,
+        public int $y,
+        public Direction $direction,
     ) {
     }
 
