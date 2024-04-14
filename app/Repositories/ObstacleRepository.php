@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Data\ObstacleData;
-use App\Data\ObstacleDataBuilder;
 use App\Models\ObstacleModel;
 
 /**
@@ -52,10 +51,10 @@ class ObstacleRepository implements ReadRepositoryInterface, WriteRepositoryInte
 
     private function convertModelToData(mixed $obstacleModel): ObstacleData
     {
-        return (new ObstacleDataBuilder())
-            ->setX($obstacleModel['x'])
-            ->setY($obstacleModel['y'])
-            ->build();
+        return new ObstacleData(
+            $obstacleModel['x'],
+            $obstacleModel['y']
+        );
     }
 
     /**

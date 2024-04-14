@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Data\PositionData;
-use App\Data\PositionDataBuilder;
 use App\Enums\Direction;
 use App\Models\PositionModel;
 
@@ -45,11 +44,11 @@ class PositionRepository implements ReadRepositoryInterface, WriteRepositoryInte
 
     private function convertModelToData(PositionModel $positionModel): PositionData
     {
-        return (new PositionDataBuilder())
-            ->setX($positionModel['x'])
-            ->setY($positionModel['y'])
-            ->setDirection(Direction::getEnum($positionModel['direction']))
-            ->build();
+        return new PositionData(
+            $positionModel['x'],
+            $positionModel['y'],
+            Direction::getEnum($positionModel['direction'])
+        );
     }
 
     /**

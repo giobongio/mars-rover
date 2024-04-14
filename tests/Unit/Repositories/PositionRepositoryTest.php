@@ -1,6 +1,6 @@
 <?php
  
-namespace Tests\Feature\Repositories;
+namespace Tests\Unit\Repositories;
  
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Enums\Direction;
@@ -14,8 +14,8 @@ class PositionRepositoryTest extends TestCase
  
     public function test_savePositionData_getSamePositionData(): void
     {
-        $x = 200;
-        $y = 300;
+        $x = 20;
+        $y = 30;
         $direction = Direction::WEST;
 
         $positionData = new PositionData(
@@ -33,8 +33,8 @@ class PositionRepositoryTest extends TestCase
  
     public function test_deletePositionData_getNull(): void
     {
-        $x = 200;
-        $y = 300;
+        $x = 20;
+        $y = 30;
         $direction = Direction::WEST;
 
         $positionData = new PositionData(

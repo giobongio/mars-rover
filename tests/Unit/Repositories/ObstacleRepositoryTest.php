@@ -1,6 +1,6 @@
 <?php
  
-namespace Tests\Feature\Repositories;
+namespace Tests\Unit\Repositories;
  
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Repositories\ObstacleRepository;
@@ -13,8 +13,8 @@ class ObstacleRepositoryTest extends TestCase
  
     public function test_saveObstacleData_getSameObstacleData(): void
     {
-        $x = 200;
-        $y = 300;
+        $x = 20;
+        $y = 30;
 
         $obstacleData = new ObstacleData(
             $x,
@@ -30,8 +30,8 @@ class ObstacleRepositoryTest extends TestCase
  
     public function test_deleteObstacleData_getNull(): void
     {
-        $x = 200;
-        $y = 300;
+        $x = 20;
+        $y = 30;
 
         $obstacleData = new ObstacleData(
             $x,
