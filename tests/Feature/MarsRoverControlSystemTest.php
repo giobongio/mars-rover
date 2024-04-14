@@ -8,6 +8,7 @@ use App\Data\CommandResult;
 use App\Data\Position;
 use App\Data\Obstacle;
 use App\Enums\Direction;
+use App\Enums\Command;
 use App\Repositories\ObstacleRepository;
 use App\Repositories\PositionRepository;
 use Tests\TestCase;
@@ -46,10 +47,10 @@ class MarsRoverControlSystemTest extends TestCase
         $actualResult = $marsRoverControlSystem->sendCommands($commands);
 
         $expectedResult = [
-            new CommandResult($commands[0], new Position(10, 19, Direction::NORTH), true),
-            new CommandResult($commands[1], new Position(10, 19, Direction::WEST), true),
-            new CommandResult($commands[2], new Position(10, 19, Direction::NORTH), true),
-            new CommandResult($commands[3], new Position(10, 20, Direction::NORTH), true),
+            new CommandResult(Command::getEnum($commands[0]), new Position(10, 19, Direction::NORTH), true),
+            new CommandResult(Command::getEnum($commands[1]), new Position(10, 19, Direction::WEST), true),
+            new CommandResult(Command::getEnum($commands[2]), new Position(10, 19, Direction::NORTH), true),
+            new CommandResult(Command::getEnum($commands[3]), new Position(10, 20, Direction::NORTH), true),
         ];
         
         $this->assertEquals($expectedResult, $actualResult);
@@ -80,11 +81,11 @@ class MarsRoverControlSystemTest extends TestCase
         $actualResult = $marsRoverControlSystem->sendCommands($commands);
 
         $expectedResult = [
-            new CommandResult($commands[0], new Position(10, 19, Direction::NORTH), true),
-            new CommandResult($commands[1], new Position(10, 18, Direction::NORTH), false),
-            new CommandResult($commands[2], new Position(10, 19, Direction::WEST), true),
-            new CommandResult($commands[3], new Position(10, 19, Direction::NORTH), true),
-            new CommandResult($commands[4], new Position(10, 20, Direction::NORTH), true),
+            new CommandResult(Command::getEnum($commands[0]), new Position(10, 19, Direction::NORTH), true),
+            new CommandResult(Command::getEnum($commands[1]), new Position(10, 18, Direction::NORTH), false),
+            new CommandResult(Command::getEnum($commands[2]), new Position(10, 19, Direction::WEST), true),
+            new CommandResult(Command::getEnum($commands[3]), new Position(10, 19, Direction::NORTH), true),
+            new CommandResult(Command::getEnum($commands[4]), new Position(10, 20, Direction::NORTH), true),
         ];
         
         $this->assertEquals($expectedResult, $actualResult);
