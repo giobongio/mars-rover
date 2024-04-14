@@ -3,12 +3,12 @@
 namespace App\ApplicationLogic;
 
 use App\Data\Position;
-use App\Data\CommandResult;
+use App\Data\PositionResult;
 use App\Enums\Direction;
 use App\Repositories\ObstacleRepository;
 use App\Repositories\PositionRepository;
 
-class MarsRover
+class MarsRover implements MarsRoverInterface
 {
     private readonly array $obstacles;
 
@@ -24,7 +24,7 @@ class MarsRover
         $this->obstacles = $obstacleRepository->getAll();
     }
 
-    public function moveForward(): CommandResult
+    public function moveForward(): PositionResult
     {
         switch($this->position->direction) 
         {
@@ -46,16 +46,16 @@ class MarsRover
         }
 
         if($this->existsObstacle($newPosition->x, $newPosition->y)) {
-            return new CommandResult($newPosition, false);
+            return new PositionResult($newPosition, false);
         }
 
         $this->positionRepository->save($newPosition);
         $this->position = $newPosition;
 
-        return new CommandResult($newPosition, true);
+        return new PositionResult($newPosition, true);
     }
 
-    public function moveBackward(): CommandResult
+    public function moveBackward(): PositionResult
     {
         switch($this->position->direction) 
         {
@@ -77,16 +77,16 @@ class MarsRover
         }
 
         if($this->existsObstacle($newPosition->x, $newPosition->y)) {
-            return new CommandResult($newPosition, false);
+            return new PositionResult($newPosition, false);
         }
 
         $this->positionRepository->save($newPosition);
         $this->position = $newPosition;
 
-        return new CommandResult($newPosition, true);
+        return new PositionResult($newPosition, true);
     }
 
-    public function rotateLeft(): CommandResult
+    public function rotateLeft(): PositionResult
     {
         // Clone current position to avoid to change it
         $newPosition = $this->position->clone();
@@ -113,10 +113,10 @@ class MarsRover
         $this->positionRepository->save($newPosition);
         $this->position = $newPosition;
 
-        return new CommandResult($newPosition, true);
+        return new PositionResult($newPosition, true);
     }
 
-    public function rotateRight(): CommandResult
+    public function rotateRight(): PositionResult
     {
         // Clone current position to avoid to change it
         $newPosition = $this->position->clone();
@@ -143,7 +143,7 @@ class MarsRover
         $this->positionRepository->save($newPosition);
         $this->position = $newPosition;
 
-        return new CommandResult($newPosition, true);
+        return new PositionResult($newPosition, true);
     }
 
     public function getPosition(): Position

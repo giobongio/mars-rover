@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\ApplicationLogic\MarsRover;
-use App\Data\CommandResult;
+use App\Data\PositionResult;
 use App\Data\Obstacle;
 use App\Data\Position;
 use App\Enums\Direction;
@@ -41,7 +41,7 @@ class MarsRoverTest extends TestCase
         $actualResult = $marsRover->moveForward();
 
         $expectedPosition = new Position($x, $y - 1, $direction);
-        $expectedResult = new CommandResult($expectedPosition, true);
+        $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -68,7 +68,7 @@ class MarsRoverTest extends TestCase
         $actualResult = $marsRover->moveForward();
 
         $expectedPosition = new Position(floor(($x + self::TOTAL_MERIDIANS / 2) % self::TOTAL_MERIDIANS), 1, Direction::SOUTH);
-        $expectedResult = new CommandResult($expectedPosition, true);
+        $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -95,7 +95,7 @@ class MarsRoverTest extends TestCase
         $actualResult = $marsRover->moveForward();
 
         $expectedPosition = new Position($x, $y + 1, $direction);
-        $expectedResult = new CommandResult($expectedPosition, true);
+        $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -122,7 +122,7 @@ class MarsRoverTest extends TestCase
         $actualResult = $marsRover->moveForward();
 
         $expectedPosition = new Position(ceil(($x + self::TOTAL_MERIDIANS / 2) % self::TOTAL_MERIDIANS), self::TOTAL_PARALLELS - 2, Direction::NORTH);
-        $expectedResult = new CommandResult($expectedPosition, true);
+        $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -149,7 +149,7 @@ class MarsRoverTest extends TestCase
         $actualResult = $marsRover->moveForward();
 
         $expectedPosition = new Position(($x + 1) % (self::TOTAL_MERIDIANS - 1), $y, $direction);
-        $expectedResult = new CommandResult($expectedPosition, true);
+        $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -176,7 +176,7 @@ class MarsRoverTest extends TestCase
         $actualResult = $marsRover->moveForward();
 
         $expectedPosition = new Position(1, $y, $direction);
-        $expectedResult = new CommandResult($expectedPosition, true);
+        $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -203,7 +203,7 @@ class MarsRoverTest extends TestCase
         $actualResult = $marsRover->moveForward();
 
         $expectedPosition = new Position($x - 1, $y, $direction);
-        $expectedResult = new CommandResult($expectedPosition, true);
+        $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -230,7 +230,7 @@ class MarsRoverTest extends TestCase
         $actualResult = $marsRover->moveForward();
 
         $expectedPosition = new Position(self::TOTAL_PARALLELS - 2, $y, $direction);
-        $expectedResult = new CommandResult($expectedPosition, true);
+        $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -259,7 +259,7 @@ class MarsRoverTest extends TestCase
         $actualResult = $marsRover->moveBackward();
 
         $expectedPosition = new Position($x, $y + 1, $direction);
-        $expectedResult = new CommandResult($expectedPosition, true);
+        $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -286,7 +286,7 @@ class MarsRoverTest extends TestCase
         $actualResult = $marsRover->moveBackward();
 
         $expectedPosition = new Position(ceil(($x + self::TOTAL_MERIDIANS / 2) % self::TOTAL_MERIDIANS), self::TOTAL_PARALLELS - 2, Direction::SOUTH);
-        $expectedResult = new CommandResult($expectedPosition, true);
+        $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -313,7 +313,7 @@ class MarsRoverTest extends TestCase
         $actualResult = $marsRover->moveBackward();
 
         $expectedPosition = new Position($x, $y - 1, $direction);
-        $expectedResult = new CommandResult($expectedPosition, true);
+        $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -340,7 +340,7 @@ class MarsRoverTest extends TestCase
         $actualResult = $marsRover->moveBackward();
 
         $expectedPosition = new Position(floor(($x + self::TOTAL_MERIDIANS / 2) % self::TOTAL_MERIDIANS), 1, Direction::NORTH);
-        $expectedResult = new CommandResult($expectedPosition, true);
+        $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -367,7 +367,7 @@ class MarsRoverTest extends TestCase
         $actualResult = $marsRover->moveBackward();
 
         $expectedPosition = new Position($x - 1, $y, $direction);
-        $expectedResult = new CommandResult($expectedPosition, true);
+        $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -395,7 +395,7 @@ class MarsRoverTest extends TestCase
         $actualResult = $marsRover->moveBackward();
 
         $expectedPosition = new Position(self::TOTAL_PARALLELS - 2, $y, $direction);
-        $expectedResult = new CommandResult($expectedPosition, true);
+        $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -422,7 +422,7 @@ class MarsRoverTest extends TestCase
         $actualResult = $marsRover->moveBackward();
 
         $expectedPosition = new Position(($x + 1) % (self::TOTAL_MERIDIANS - 1), $y, $direction);
-        $expectedResult = new CommandResult($expectedPosition, true);
+        $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -450,7 +450,7 @@ class MarsRoverTest extends TestCase
         $actualResult = $marsRover->moveBackward();
 
         $expectedPosition = new Position(1, $y, $direction);
-        $expectedResult = new CommandResult($expectedPosition, true);
+        $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -483,7 +483,7 @@ class MarsRoverTest extends TestCase
         $actualResult = $marsRover->moveForward();
 
         $expectedPosition = new Position($x, $y - 1, $direction);
-        $expectedResult = new CommandResult($expectedPosition, false);
+        $expectedResult = new PositionResult($expectedPosition, false);
         
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -515,7 +515,7 @@ class MarsRoverTest extends TestCase
         $actualResult = $marsRover->moveBackward();
 
         $expectedPosition = new Position($x - 1, $y, $direction);
-        $expectedResult = new CommandResult($expectedPosition, false);
+        $expectedResult = new PositionResult($expectedPosition, false);
         
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -544,7 +544,7 @@ class MarsRoverTest extends TestCase
         $actualResult = $marsRover->rotateLeft();
 
         $expectedPosition = new Position($x, $y, Direction::NORTH);
-        $expectedResult = new CommandResult($expectedPosition, true);
+        $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
     }
@@ -573,7 +573,7 @@ class MarsRoverTest extends TestCase
         $actualResult = $marsRover->rotateRight();
 
         $expectedPosition = new Position($x, $y, Direction::NORTH);
-        $expectedResult = new CommandResult($expectedPosition, true);
+        $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
     }

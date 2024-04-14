@@ -2,23 +2,20 @@
 
 namespace App\Data;
 
-use App\Data\Position;
 use JsonSerializable;
 
-class CommandResult implements JsonSerializable
+class PositionResult implements JsonSerializable
 {
     public function __construct(
-        public readonly string $command,
-        public readonly ?Position $position = null,
+        public readonly Position $position,
         public readonly bool $success
     ) {
     }
 
-    public function clone(): CommandResult
+    public function clone(): PositionResult
     {
-        return new CommandResult(
-            $this->command, 
-            $this->position->clone(),
+        return new PositionResult(
+            $this->position, 
             $this->success
         );
     }
