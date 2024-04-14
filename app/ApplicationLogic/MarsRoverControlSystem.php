@@ -65,7 +65,7 @@ class MarsRoverControlSystem implements MarsRoverControlSystemInterface
                 $positionResult->success
             );
             
-        } while($positionResult->position != $initialPosition || $positionResult->success == false);
+        } while($positionResult->position != $initialPosition && $positionResult->success != false);
 
         return $commandResults;
     }
