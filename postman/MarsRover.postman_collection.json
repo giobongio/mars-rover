@@ -13,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"commands\": \"fflrb\"\r\n}",
+					"raw": "{\r\n    \"commands\": [\r\n        \"f\",\r\n        \"f\",\r\n        \"l\",\r\n        \"r\",\r\n        \"b\"\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,9 +21,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{Rover}}/marsrover/sendCommands",
+					"raw": "{{MarsRoverApi}}/marsrover/sendCommands",
 					"host": [
-						"{{Rover}}"
+						"{{MarsRoverApi}}"
 					],
 					"path": [
 						"marsrover",
@@ -48,9 +48,9 @@
 					}
 				},
 				"url": {
-					"raw": "{{Rover}}/marsrover/setPosition",
+					"raw": "{{MarsRoverApi}}/marsrover/setPosition",
 					"host": [
-						"{{Rover}}"
+						"{{MarsRoverApi}}"
 					],
 					"path": [
 						"marsrover",
@@ -66,9 +66,9 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{Rover}}/marsrover/wrap",
+					"raw": "{{MarsRoverApi}}/marsrover/wrap",
 					"host": [
-						"{{Rover}}"
+						"{{MarsRoverApi}}"
 					],
 					"path": [
 						"marsrover",
