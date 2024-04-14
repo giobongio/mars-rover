@@ -22,6 +22,17 @@ class PositionRepository implements ReadRepositoryInterface, WriteRepositoryInte
         return $this->convertModelToData($positionModel);
     }
 
+    public function getLast(): ?Position
+    {
+        $positionModel = PositionModel::last();
+
+        if (!$positionModel || !$positionModel->exists) {
+            return null;
+        }
+
+        return $this->convertModelToData($positionModel);
+    }
+
     /**
      * @param Position $position
      *

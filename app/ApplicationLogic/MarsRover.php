@@ -7,25 +7,33 @@ use App\Data\PositionResult;
 use App\Enums\Direction;
 use App\Repositories\ObstacleRepository;
 use App\Repositories\PositionRepository;
+use Exception;
 
 class MarsRover implements MarsRoverInterface
 {
     private readonly array $obstacles;
+    private ?Position $position = null;
 
     public function __construct(
         private readonly int $totalParallels,
         private readonly int $totalMeridians,
-        private Position $position,
         private readonly PositionRepository $positionRepository,
         private readonly ObstacleRepository $obstacleRepository
     ) {
-
         // Get obstacles in memory to perform faster queries
         $this->obstacles = $obstacleRepository->getAll();
+
+        // Try to get last position
+        $lastPosition = $positionRepository->getLast();
+        if(!empty($lastPosition)) {
+            $this->position = $lastPosition;
+        }
     }
 
     public function moveForward(): PositionResult
     {
+        $this->checkPosition();
+
         switch($this->position->direction) 
         {
             case Direction::NORTH:
@@ -57,6 +65,8 @@ class MarsRover implements MarsRoverInterface
 
     public function moveBackward(): PositionResult
     {
+        $this->checkPosition();
+
         switch($this->position->direction) 
         {
             case Direction::NORTH:
@@ -88,6 +98,8 @@ class MarsRover implements MarsRoverInterface
 
     public function rotateLeft(): PositionResult
     {
+        $this->checkPosition();
+
         // Clone current position to avoid to change it
         $newPosition = $this->position->clone();
 
@@ -118,6 +130,8 @@ class MarsRover implements MarsRoverInterface
 
     public function rotateRight(): PositionResult
     {
+        $this->checkPosition();
+
         // Clone current position to avoid to change it
         $newPosition = $this->position->clone();
 
@@ -146,7 +160,14 @@ class MarsRover implements MarsRoverInterface
         return new PositionResult($newPosition, true);
     }
 
-    public function getPosition(): Position
+    public function setPosition(Position $newPosition): void
+    {
+        // Update repository to keep its value consistent with class data
+        $this->positionRepository->save($newPosition);
+        $this->position = $newPosition;
+    }
+
+    public function getPosition(): ?Position
     {
         return $this->position;
     }
@@ -232,5 +253,12 @@ class MarsRover implements MarsRoverInterface
         }
 
         return false;
+    }
+
+    private function checkPosition(): void
+    {
+        if(empty($this->position)) {
+            throw new Exception('Rover position not set');
+        }
     }
 }

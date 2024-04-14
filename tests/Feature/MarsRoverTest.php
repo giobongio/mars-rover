@@ -25,19 +25,17 @@ class MarsRoverTest extends TestCase
         $y = rand(1, self::TOTAL_PARALLELS - 1);
         $direction = Direction::NORTH;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveForward();
 
         $expectedPosition = new Position($x, $y - 1, $direction);
@@ -52,19 +50,17 @@ class MarsRoverTest extends TestCase
         $y = 0;
         $direction = Direction::NORTH;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveForward();
 
         $expectedPosition = new Position(floor(($x + self::TOTAL_MERIDIANS / 2) % self::TOTAL_MERIDIANS), 1, Direction::SOUTH);
@@ -79,19 +75,17 @@ class MarsRoverTest extends TestCase
         $y = rand(0, self::TOTAL_PARALLELS - 2);
         $direction = Direction::SOUTH;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveForward();
 
         $expectedPosition = new Position($x, $y + 1, $direction);
@@ -106,19 +100,17 @@ class MarsRoverTest extends TestCase
         $y = self::TOTAL_PARALLELS - 1;
         $direction = Direction::SOUTH;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveForward();
 
         $expectedPosition = new Position(ceil(($x + self::TOTAL_MERIDIANS / 2) % self::TOTAL_MERIDIANS), self::TOTAL_PARALLELS - 2, Direction::NORTH);
@@ -133,19 +125,17 @@ class MarsRoverTest extends TestCase
         $y = rand(0, self::TOTAL_PARALLELS - 1);
         $direction = Direction::EAST;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveForward();
 
         $expectedPosition = new Position(($x + 1) % (self::TOTAL_MERIDIANS - 1), $y, $direction);
@@ -160,19 +150,17 @@ class MarsRoverTest extends TestCase
         $y = rand(0, self::TOTAL_PARALLELS - 1);
         $direction = Direction::EAST;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveForward();
 
         $expectedPosition = new Position(1, $y, $direction);
@@ -187,19 +175,17 @@ class MarsRoverTest extends TestCase
         $y = rand(0, self::TOTAL_PARALLELS - 1);
         $direction = Direction::WEST;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveForward();
 
         $expectedPosition = new Position($x - 1, $y, $direction);
@@ -214,19 +200,17 @@ class MarsRoverTest extends TestCase
         $y = rand(0, self::TOTAL_PARALLELS - 1);
         $direction = Direction::WEST;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveForward();
 
         $expectedPosition = new Position(self::TOTAL_PARALLELS - 2, $y, $direction);
@@ -243,19 +227,17 @@ class MarsRoverTest extends TestCase
         $y = rand(0, self::TOTAL_PARALLELS - 2);
         $direction = Direction::NORTH;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveBackward();
 
         $expectedPosition = new Position($x, $y + 1, $direction);
@@ -270,19 +252,17 @@ class MarsRoverTest extends TestCase
         $y = self::TOTAL_PARALLELS - 1;
         $direction = Direction::NORTH;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveBackward();
 
         $expectedPosition = new Position(ceil(($x + self::TOTAL_MERIDIANS / 2) % self::TOTAL_MERIDIANS), self::TOTAL_PARALLELS - 2, Direction::SOUTH);
@@ -297,19 +277,17 @@ class MarsRoverTest extends TestCase
         $y = rand(1, self::TOTAL_PARALLELS - 1);
         $direction = Direction::SOUTH;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveBackward();
 
         $expectedPosition = new Position($x, $y - 1, $direction);
@@ -324,19 +302,17 @@ class MarsRoverTest extends TestCase
         $y = 0;
         $direction = Direction::SOUTH;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveBackward();
 
         $expectedPosition = new Position(floor(($x + self::TOTAL_MERIDIANS / 2) % self::TOTAL_MERIDIANS), 1, Direction::NORTH);
@@ -351,19 +327,17 @@ class MarsRoverTest extends TestCase
         $y = rand(0, self::TOTAL_PARALLELS - 1);
         $direction = Direction::EAST;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveBackward();
 
         $expectedPosition = new Position($x - 1, $y, $direction);
@@ -379,19 +353,17 @@ class MarsRoverTest extends TestCase
         $y = rand(0, self::TOTAL_PARALLELS - 1);
         $direction = Direction::EAST;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveBackward();
 
         $expectedPosition = new Position(self::TOTAL_PARALLELS - 2, $y, $direction);
@@ -406,19 +378,17 @@ class MarsRoverTest extends TestCase
         $y = rand(0, self::TOTAL_PARALLELS - 1);
         $direction = Direction::WEST;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveBackward();
 
         $expectedPosition = new Position(($x + 1) % (self::TOTAL_MERIDIANS - 1), $y, $direction);
@@ -434,19 +404,17 @@ class MarsRoverTest extends TestCase
         $y = rand(0, self::TOTAL_PARALLELS - 1);
         $direction = Direction::WEST;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveBackward();
 
         $expectedPosition = new Position(1, $y, $direction);
@@ -463,8 +431,6 @@ class MarsRoverTest extends TestCase
         $y = rand(1, self::TOTAL_PARALLELS - 1);
         $direction = Direction::NORTH;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
         $obstacleRepository->method('getAll')
@@ -475,11 +441,11 @@ class MarsRoverTest extends TestCase
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveForward();
 
         $expectedPosition = new Position($x, $y - 1, $direction);
@@ -494,8 +460,6 @@ class MarsRoverTest extends TestCase
         $y = rand(0, self::TOTAL_PARALLELS - 1);
         $direction = Direction::EAST;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
 
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
@@ -507,11 +471,11 @@ class MarsRoverTest extends TestCase
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveBackward();
 
         $expectedPosition = new Position($x - 1, $y, $direction);
@@ -528,19 +492,17 @@ class MarsRoverTest extends TestCase
         $y = rand(0, self::TOTAL_PARALLELS - 1);
         $direction = Direction::EAST;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->rotateLeft();
 
         $expectedPosition = new Position($x, $y, Direction::NORTH);
@@ -557,7 +519,96 @@ class MarsRoverTest extends TestCase
         $y = rand(0, self::TOTAL_PARALLELS - 1);
         $direction = Direction::WEST;
 
-        $initialPosition = new Position($x, $y, $direction);
+        $positionRepository = $this->createMock(PositionRepository::class);
+        $obstacleRepository = $this->createMock(ObstacleRepository::class);
+
+        $marsRover = new MarsRover(
+            self::TOTAL_PARALLELS,
+            self::TOTAL_MERIDIANS,
+            $positionRepository,
+            $obstacleRepository
+        );
+
+        $marsRover->setPosition(new Position($x, $y, $direction));
+        $actualResult = $marsRover->rotateRight();
+
+        $expectedPosition = new Position($x, $y, Direction::NORTH);
+        $expectedResult = new PositionResult($expectedPosition, true);
+        
+        $this->assertEquals($expectedResult, $actualResult);
+    }
+
+    // Position
+
+    public function test_moveForwardWithUndefinedPosition_throwsException(): void
+    {
+        $positionRepository = $this->createMock(PositionRepository::class);
+        $obstacleRepository = $this->createMock(ObstacleRepository::class);
+
+        $marsRover = new MarsRover(
+            self::TOTAL_PARALLELS,
+            self::TOTAL_MERIDIANS,
+            $positionRepository,
+            $obstacleRepository
+        );
+
+        $this->expectException(Exception::class);
+        $marsRover->moveForward();
+    }
+
+    public function test_moveBackwardWithUndefinedPosition_throwsException(): void
+    {
+        $positionRepository = $this->createMock(PositionRepository::class);
+        $obstacleRepository = $this->createMock(ObstacleRepository::class);
+
+        $marsRover = new MarsRover(
+            self::TOTAL_PARALLELS,
+            self::TOTAL_MERIDIANS,
+            $positionRepository,
+            $obstacleRepository
+        );
+
+        $this->expectException(Exception::class);
+        $marsRover->moveBackward();
+    }
+
+    public function test_rotateLeftWithUndefinedPosition_throwsException(): void
+    {
+        $positionRepository = $this->createMock(PositionRepository::class);
+        $obstacleRepository = $this->createMock(ObstacleRepository::class);
+
+        $marsRover = new MarsRover(
+            self::TOTAL_PARALLELS,
+            self::TOTAL_MERIDIANS,
+            $positionRepository,
+            $obstacleRepository
+        );
+
+        $this->expectException(Exception::class);
+        $marsRover->rotateLeft();
+    }
+
+    public function test_rotateRightWithUndefinedPosition_throwsException(): void
+    {
+        $positionRepository = $this->createMock(PositionRepository::class);
+        $obstacleRepository = $this->createMock(ObstacleRepository::class);
+
+        $marsRover = new MarsRover(
+            self::TOTAL_PARALLELS,
+            self::TOTAL_MERIDIANS,
+            $positionRepository,
+            $obstacleRepository
+        );
+
+        $this->expectException(Exception::class);
+        $marsRover->rotateRight();
+    }
+
+    public function test_setPosition_getExpectedPosition(): void
+    {
+        $x = rand(0, self::TOTAL_MERIDIANS - 1);
+        $y = rand(0, self::TOTAL_PARALLELS - 1);
+        $direction = Direction::WEST;
 
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
@@ -565,16 +616,15 @@ class MarsRoverTest extends TestCase
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
-        $actualResult = $marsRover->rotateRight();
-
-        $expectedPosition = new Position($x, $y, Direction::NORTH);
-        $expectedResult = new PositionResult($expectedPosition, true);
+        $expectedPosition = new Position($x, $y, $direction);
         
-        $this->assertEquals($expectedResult, $actualResult);
+        $marsRover->setPosition($expectedPosition);
+        $actualPosition = $marsRover->getPosition($expectedPosition);
+
+        $this->assertEquals($expectedPosition, $actualPosition);
     }
 }

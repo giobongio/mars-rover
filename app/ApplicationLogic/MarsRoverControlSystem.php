@@ -15,7 +15,7 @@ class MarsRoverControlSystem implements MarsRoverControlSystemInterface
     {
         $commandResults = [];
 
-        foreach(str_split($commands) as $command) 
+        foreach(mb_str_split($commands) as $command) 
         {
             if(!Command::isValid($command)) {
                 $commandResults[] = new CommandResult($command, $this->marsRover->getPosition(), false);

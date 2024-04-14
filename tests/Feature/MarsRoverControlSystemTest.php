@@ -31,11 +31,11 @@ class MarsRoverControlSystemTest extends TestCase
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $marsRoverControlSystem = new MarsRoverControlSystem($marsRover);
 
         $commands = 'flrb';
@@ -69,11 +69,11 @@ class MarsRoverControlSystemTest extends TestCase
         $marsRover = new MarsRover(
             self::TOTAL_PARALLELS,
             self::TOTAL_MERIDIANS,
-            $initialPosition,
             $positionRepository,
             $obstacleRepository
         );
 
+        $marsRover->setPosition(new Position($x, $y, $direction));
         $marsRoverControlSystem = new MarsRoverControlSystem($marsRover);
 
         $commands = 'fflrb';
