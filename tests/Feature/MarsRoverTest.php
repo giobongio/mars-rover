@@ -621,9 +621,9 @@ class MarsRoverTest extends TestCase
         );
 
         $expectedPosition = new Position($x, $y, $direction);
-        
+
         $marsRover->setPosition($expectedPosition);
-        $actualPosition = $marsRover->getPosition($expectedPosition);
+        $actualPosition = $marsRover->getPosition();
 
         $this->assertEquals($expectedPosition, $actualPosition);
     }

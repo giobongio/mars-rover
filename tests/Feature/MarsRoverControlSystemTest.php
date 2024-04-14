@@ -57,8 +57,6 @@ class MarsRoverControlSystemTest extends TestCase
         $y = 20;
         $direction = Direction::NORTH;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
         $obstacleRepository->method('getAll')
@@ -88,5 +86,34 @@ class MarsRoverControlSystemTest extends TestCase
         ];
         
         $this->assertEquals($expectedResult, $actualResult);
+    }
+
+    public function test_setPosition_getExpectedPosition(): void
+    {
+        $x = 10;
+        $y = 20;
+        $direction = Direction::NORTH;
+
+        $positionRepository = $this->createMock(PositionRepository::class);
+        $obstacleRepository = $this->createMock(ObstacleRepository::class);
+        $obstacleRepository->method('getAll')
+            ->willReturn([
+                new Obstacle(10, 18)
+            ]);
+
+        $marsRover = new MarsRover(
+            self::TOTAL_PARALLELS,
+            self::TOTAL_MERIDIANS,
+            $positionRepository,
+            $obstacleRepository
+        );
+
+        $marsRoverControlSystem = new MarsRoverControlSystem($marsRover);
+        $expectedPosition = new Position($x, $y, $direction);
+        
+        $marsRoverControlSystem->setPosition($expectedPosition);
+        $actualPosition = $marsRover->getPosition();
+
+        $this->assertEquals($expectedPosition, $actualPosition);
     }
 }

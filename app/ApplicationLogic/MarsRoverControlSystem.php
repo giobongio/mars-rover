@@ -2,6 +2,7 @@
 
 namespace App\ApplicationLogic;
 
+use App\Data\Position;
 use App\Data\CommandResult;
 use App\Enums\Command;
 
@@ -45,5 +46,15 @@ class MarsRoverControlSystem implements MarsRoverControlSystemInterface
         }
 
         return $commandResults;
+    }
+
+    public function setPosition(Position $position): void
+    {
+        $this->marsRover->setPosition($position);
+    }
+
+    public function getPosition(): Position
+    {
+        return $this->marsRover->getPosition();
     }
 }
