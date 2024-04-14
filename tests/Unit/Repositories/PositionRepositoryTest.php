@@ -31,6 +31,25 @@ class PositionRepositoryTest extends TestCase
         $this->assertEquals($position, $actualData);
     }
  
+    public function test_savePosition_getLastPosition(): void
+    {
+        $x = 20;
+        $y = 30;
+        $direction = Direction::WEST;
+
+        $position = new Position(
+            $x,
+            $y,
+            $direction
+        );
+
+        $positionRepository = new PositionRepository();
+        $positionRepository->save($position);
+
+        $actualData = $positionRepository->getLast();
+        $this->assertEquals($position, $actualData);
+    }
+ 
     public function test_deletePosition_getNull(): void
     {
         $x = 20;

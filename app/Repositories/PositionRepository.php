@@ -24,7 +24,7 @@ class PositionRepository implements ReadRepositoryInterface, WriteRepositoryInte
 
     public function getLast(): ?Position
     {
-        $positionModel = PositionModel::last();
+        $positionModel = PositionModel::latest()->first();
 
         if (!$positionModel || !$positionModel->exists) {
             return null;

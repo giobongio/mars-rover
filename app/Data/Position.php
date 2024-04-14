@@ -3,10 +3,9 @@
 namespace App\Data;
 
 use App\Enums\Direction;
-use JsonSerializable;
 use InvalidArgumentException;
 
-class Position implements JsonSerializable
+class Position
 {
     public int $x;
     public int $y;
@@ -41,10 +40,5 @@ class Position implements JsonSerializable
             $this->y, 
             $this->direction
         );
-    }
-
-    public function jsonSerialize(): mixed
-    {
-        return json_encode((object) get_object_vars($this));
     }
 }

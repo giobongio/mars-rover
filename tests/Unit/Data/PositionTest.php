@@ -41,20 +41,4 @@ class PositionTest extends TestCase
         $this->assertEquals($y, $position->y);
         $this->assertEquals($direction, $position->direction);
     }
-
-    public function test_serialize_outputSerializedData(): void
-    {
-        $x = 20;
-        $y = 30;
-        $direction = Direction::WEST;
-
-        $position = new Position(
-            $x,
-            $y,
-            $direction
-        );
-
-        $expectedPosition = '{"x":' . $x . ',"y":' . $y . ',"direction":"' . $direction->value . '"}';
-        $this->assertEquals($expectedPosition, $position->jsonSerialize());
-    }
 }

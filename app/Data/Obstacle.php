@@ -2,10 +2,9 @@
 
 namespace App\Data;
 
-use JsonSerializable;
 use InvalidArgumentException;
 
-class Obstacle implements JsonSerializable
+class Obstacle
 {
     public readonly int $x;
     public readonly int $y;
@@ -24,18 +23,5 @@ class Obstacle implements JsonSerializable
 
         $this->x = $x;
         $this->y = $y;
-    }
-
-    public function clone(): Obstacle
-    {
-        return new Obstacle(
-            $this->x, 
-            $this->y
-        );
-    }
-
-    public function jsonSerialize(): mixed
-    {
-        return json_encode((object) get_object_vars($this));
     }
 }
