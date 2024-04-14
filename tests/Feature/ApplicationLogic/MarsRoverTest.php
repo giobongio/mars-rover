@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\ApplicationLogic;
 
 use App\ApplicationLogic\MarsRover;
 use App\Data\PositionResult;
@@ -573,6 +573,30 @@ class MarsRoverTest extends TestCase
     }
 
     public function test_setPosition_getExpectedPosition(): void
+    {
+        $x = rand(0, self::TOTAL_MERIDIANS - 1);
+        $y = rand(0, self::TOTAL_PARALLELS - 1);
+        $direction = Direction::WEST;
+
+        $positionRepository = $this->createMock(PositionRepository::class);
+        $obstacleRepository = $this->createMock(ObstacleRepository::class);
+
+        $marsRover = new MarsRover(
+            $positionRepository,
+            $obstacleRepository
+        );
+
+        $expectedPosition = new Position($x, $y, $direction);
+
+        $marsRover->setPosition($expectedPosition);
+        $actualPosition = $marsRover->getPosition();
+
+        $this->assertEquals($expectedPosition, $actualPosition);
+    }
+
+    // Last position
+
+    public function test_construct_getLastPosition(): void
     {
         $x = rand(0, self::TOTAL_MERIDIANS - 1);
         $y = rand(0, self::TOTAL_PARALLELS - 1);

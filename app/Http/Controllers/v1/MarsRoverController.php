@@ -28,7 +28,7 @@ class MarsRoverController extends Controller
             )
         );
         
-        return Response('ok', Response::HTTP_OK);
+        return Response(['success' => true], Response::HTTP_OK);
     }
 
     public function sendCommands(SendCommandsRequest $request): Response
