@@ -26,6 +26,14 @@ class Obstacle implements JsonSerializable
         $this->y = $y;
     }
 
+    public function clone(): Obstacle
+    {
+        return new Obstacle(
+            $this->x, 
+            $this->y
+        );
+    }
+
     public function jsonSerialize(): mixed
     {
         return json_encode((object) get_object_vars($this));

@@ -20,7 +20,7 @@ class MarsRover
         private readonly ObstacleRepository $obstacleRepository
     ) {
 
-        // Get obstacles in memory to perform faster than querying the repository
+        // Get obstacles in memory to perform faster queries
         $this->obstacles = $obstacleRepository->getAll();
     }
 
@@ -88,13 +88,61 @@ class MarsRover
 
     public function rotateLeft(): CommandResult
     {
-        $newPosition = $this->position;
+        // Clone current position to avoid to change it
+        $newPosition = $this->position->clone();
+
+        switch($this->position->direction) 
+        {
+            case Direction::NORTH:
+                $newPosition->direction = Direction::WEST;
+                break;
+
+            case Direction::SOUTH:
+                $newPosition->direction = Direction::EAST;
+                break;
+
+            case Direction::EAST:
+                $newPosition->direction = Direction::NORTH;
+                break;
+
+            case Direction::WEST:
+                $newPosition->direction = Direction::SOUTH;
+                break;
+        }
+
+        $this->positionRepository->save($newPosition);
+        $this->position = $newPosition;
+
         return new CommandResult($newPosition, true);
     }
 
     public function rotateRight(): CommandResult
     {
-        $newPosition = $this->position;
+        // Clone current position to avoid to change it
+        $newPosition = $this->position->clone();
+
+        switch($this->position->direction) 
+        {
+            case Direction::NORTH:
+                $newPosition->direction = Direction::EAST;
+                break;
+
+            case Direction::SOUTH:
+                $newPosition->direction = Direction::WEST;
+                break;
+
+            case Direction::EAST:
+                $newPosition->direction = Direction::SOUTH;
+                break;
+
+            case Direction::WEST:
+                $newPosition->direction = Direction::NORTH;
+                break;
+        }
+
+        $this->positionRepository->save($newPosition);
+        $this->position = $newPosition;
+
         return new CommandResult($newPosition, true);
     }
 
@@ -105,11 +153,8 @@ class MarsRover
 
     private function incrementX(): Position
     {
-        $position = new Position(
-            $this->position->x, 
-            $this->position->y, 
-            $this->position->direction
-        );
+        // Clone current position to avoid to change it
+        $position = $this->position->clone();
 
         // Increment the X value, and calculate module if we are wrapping the planisphere
         $position->x = ($position->x + 1) % ($this->totalMeridians - 1);
@@ -119,11 +164,8 @@ class MarsRover
 
     private function incrementY(): Position
     {
-        $position = new Position(
-            $this->position->x, 
-            $this->position->y, 
-            $this->position->direction
-        );
+        // Clone current position to avoid to change it
+        $position = $this->position->clone();
 
         // If we are inside the planisphere, simply increment the Y value
         if($position->y < $this->totalParallels - 1) {
@@ -147,11 +189,8 @@ class MarsRover
 
     private function decrementX(): Position
     {
-        $position = new Position(
-            $this->position->x, 
-            $this->position->y, 
-            $this->position->direction
-        );
+        // Clone current position to avoid to change it
+        $position = $this->position->clone();
 
         // Decrement the X value, and calculate module if we are wrapping the planisphere
         $position->x = ($position->x - 1 + ($this->totalMeridians - 1)) % ($this->totalMeridians - 1);
@@ -161,11 +200,8 @@ class MarsRover
 
     private function decrementY(): Position
     {
-        $position = new Position(
-            $this->position->x, 
-            $this->position->y, 
-            $this->position->direction
-        );
+        // Clone current position to avoid to change it
+        $position = $this->position->clone();
 
         // If we are inside the planisphere, simply decrement the Y value
         if($position->y > 0) {

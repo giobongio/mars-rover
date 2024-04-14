@@ -12,6 +12,14 @@ class CommandResult implements JsonSerializable
     ) {
     }
 
+    public function clone(): CommandResult
+    {
+        return new CommandResult(
+            $this->position, 
+            $this->success
+        );
+    }
+
     public function jsonSerialize(): mixed
     {
         return json_encode((object) get_object_vars($this));
