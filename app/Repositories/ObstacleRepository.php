@@ -2,15 +2,15 @@
 
 namespace App\Repositories;
 
-use App\Data\ObstacleData;
+use App\Data\Obstacle;
 use App\Models\ObstacleModel;
 
 /**
- * @template-implements ReadRepositoryInterface<ObstacleData>
+ * @template-implements ReadRepositoryInterface<Obstacle>
  */
 class ObstacleRepository implements ReadRepositoryInterface, WriteRepositoryInterface
 {
-    public function get(int $id): ?ObstacleData
+    public function get(int $id): ?Obstacle
     {
         $obstacleModel = ObstacleModel::find($id);
 
@@ -31,27 +31,27 @@ class ObstacleRepository implements ReadRepositoryInterface, WriteRepositoryInte
     }
 
     /**
-     * @param ObstacleData $obstacleData
+     * @param Obstacle $obstacle
      *
      * @return void
      */
-    public function save($obstacleData): void
+    public function save($obstacle): void
     {
-        $obstacleModel = $this->convertDataToModel($obstacleData);
+        $obstacleModel = $this->convertDataToModel($obstacle);
         $obstacleModel->save();
     }
 
-    private function convertDataToModel(ObstacleData $obstacleData): ObstacleModel
+    private function convertDataToModel(Obstacle $obstacle): ObstacleModel
     {
         return new ObstacleModel([
-            'x' => $obstacleData->x,
-            'y' => $obstacleData->y,
+            'x' => $obstacle->x,
+            'y' => $obstacle->y,
         ]);
     }
 
-    private function convertModelToData(mixed $obstacleModel): ObstacleData
+    private function convertModelToData(mixed $obstacleModel): Obstacle
     {
-        return new ObstacleData(
+        return new Obstacle(
             $obstacleModel['x'],
             $obstacleModel['y']
         );

@@ -6,7 +6,7 @@ use App\Enums\Direction;
 use JsonSerializable;
 use InvalidArgumentException;
 
-class PositionData implements JsonSerializable
+class Position implements JsonSerializable
 {
     public int $x;
     public int $y;

@@ -5,7 +5,7 @@ namespace App\Data;
 use JsonSerializable;
 use InvalidArgumentException;
 
-class ObstacleData implements JsonSerializable
+class Obstacle implements JsonSerializable
 {
     public readonly int $x;
     public readonly int $y;

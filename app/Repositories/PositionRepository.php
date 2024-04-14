@@ -2,16 +2,16 @@
 
 namespace App\Repositories;
 
-use App\Data\PositionData;
+use App\Data\Position;
 use App\Enums\Direction;
 use App\Models\PositionModel;
 
 /**
- * @template-implements ReadRepositoryInterface<PositionData>
+ * @template-implements ReadRepositoryInterface<Position>
  */
 class PositionRepository implements ReadRepositoryInterface, WriteRepositoryInterface
 {
-    public function get(int $id): ?PositionData
+    public function get(int $id): ?Position
     {
         $positionModel = PositionModel::find($id);
 
@@ -23,28 +23,28 @@ class PositionRepository implements ReadRepositoryInterface, WriteRepositoryInte
     }
 
     /**
-     * @param PositionData $positionData
+     * @param Position $position
      *
      * @return void
      */
-    public function save($positionData): void
+    public function save($position): void
     {
-        $positionModel = $this->convertDataToModel($positionData);
+        $positionModel = $this->convertDataToModel($position);
         $positionModel->save();
     }
 
-    private function convertDataToModel(PositionData $positionData): PositionModel
+    private function convertDataToModel(Position $position): PositionModel
     {
         return new PositionModel([
-            'x' => $positionData->x,
-            'y' => $positionData->y,
-            'direction' => $positionData->direction->value,
+            'x' => $position->x,
+            'y' => $position->y,
+            'direction' => $position->direction->value,
         ]);
     }
 
-    private function convertModelToData(PositionModel $positionModel): PositionData
+    private function convertModelToData(PositionModel $positionModel): Position
     {
-        return new PositionData(
+        return new Position(
             $positionModel['x'],
             $positionModel['y'],
             Direction::getEnum($positionModel['direction'])

@@ -3,7 +3,7 @@
 namespace App\Controllers\v1;
 
 use App\Controllers\Controller;
-use App\Data\PositionData;
+use App\Data\Position;
 use App\Enums\Direction;
 use App\Repositories\PositionRepository;
 use App\Repositories\ObstacleRepository;
@@ -29,14 +29,14 @@ class PositionController extends Controller
         $y = 30;
         $direction = Direction::WEST;
 
-        $positionData = new PositionData(
+        $position = new Position(
             $x,
             $y,
             $direction
         );
 
         $positionRepository = new PositionRepository();
-        $positionRepository->save($positionData);
+        $positionRepository->save($position);
         $foo = $positionRepository->get(1);*/
 
         /*$obstacleRepository = new ObstacleRepository();
