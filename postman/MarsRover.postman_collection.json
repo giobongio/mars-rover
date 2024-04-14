@@ -1,0 +1,82 @@
+{
+	"info": {
+		"_postman_id": "3383aa9a-edb9-43ad-999e-412f04a1eda7",
+		"name": "MarsRover",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14491801"
+	},
+	"item": [
+		{
+			"name": "sendCommands",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"commands\": \"fflrb\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Rover}}/marsrover/sendCommands",
+					"host": [
+						"{{Rover}}"
+					],
+					"path": [
+						"marsrover",
+						"sendCommands"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setPosition",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"x\": 10,\r\n    \"y\": 1,\r\n    \"direction\": \"N\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{Rover}}/marsrover/setPosition",
+					"host": [
+						"{{Rover}}"
+					],
+					"path": [
+						"marsrover",
+						"setPosition"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "wrap",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{Rover}}/marsrover/wrap",
+					"host": [
+						"{{Rover}}"
+					],
+					"path": [
+						"marsrover",
+						"wrap"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
