@@ -13,11 +13,11 @@ class MarsRoverControlSystem implements MarsRoverControlSystemInterface
     {
     }
 
-    public function sendCommands(string $commandValues): array
+    public function sendCommands(array $commandValues): array
     {
         $commandResults = [];
 
-        foreach(mb_str_split($commandValues) as $commandValue) 
+        foreach($commandValues as $commandValue) 
         {
             $command = Command::getEnum($commandValue);
 

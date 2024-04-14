@@ -61,7 +61,7 @@ class MarsRoverControllerTest extends TestCase
 
 
         $data = [
-            'commands' => 'f'
+            'commands' => ['f']
         ];
 
         $response = $this->postJson(

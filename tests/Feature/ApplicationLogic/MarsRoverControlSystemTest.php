@@ -43,7 +43,7 @@ class MarsRoverControlSystemTest extends TestCase
         $marsRover->setPosition(new Position($x, $y, $direction));
         $marsRoverControlSystem = new MarsRoverControlSystem($marsRover);
 
-        $commands = 'flrb';
+        $commands = ['f', 'l', 'r', 'b'];
         $actualResult = $marsRoverControlSystem->sendCommands($commands);
 
         $expectedResult = [
@@ -77,7 +77,7 @@ class MarsRoverControlSystemTest extends TestCase
         $marsRover->setPosition(new Position($x, $y, $direction));
         $marsRoverControlSystem = new MarsRoverControlSystem($marsRover);
 
-        $commands = 'fflrb';
+        $commands = ['f', 'f', 'l', 'r', 'b'];
         $actualResult = $marsRoverControlSystem->sendCommands($commands);
 
         $expectedResult = [

@@ -22,7 +22,7 @@ class SendCommandsRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'commands' => 'required|string',
+            'commands' => 'required|array|min:1',
         ];
     }
 }
