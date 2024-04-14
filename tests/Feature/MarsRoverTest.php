@@ -104,7 +104,7 @@ class MarsRoverTest extends TestCase
 
     public function test_moveForwardSouthAtSouthPole_getNewPosition(): void
     {
-        $x = rand(0, self::TOTAL_MERIDIANS - 1);
+        $x = 2;
         $y = self::TOTAL_PARALLELS - 1;
         $direction = Direction::SOUTH;
 
@@ -126,7 +126,7 @@ class MarsRoverTest extends TestCase
 
         $marsRover->moveForward();
 
-        $expectedPosition = new Position(ceil(($x + self::TOTAL_MERIDIANS / 2) % self::TOTAL_MERIDIANS), 1, Direction::SOUTH);
+        $expectedPosition = new Position(ceil(($x + self::TOTAL_MERIDIANS / 2) % self::TOTAL_MERIDIANS), self::TOTAL_PARALLELS - 2, Direction::NORTH);
         $this->assertEquals($expectedPosition, $marsRover->getPosition());
     }
 
@@ -155,6 +155,34 @@ class MarsRoverTest extends TestCase
         $marsRover->moveForward();
 
         $expectedPosition = new Position($x + 1, $y, $direction);
+        $this->assertEquals($expectedPosition, $marsRover->getPosition());
+    }
+
+    public function test_moveForwardEastAtEastBorder_getNewPosition(): void
+    {
+        $x = self::TOTAL_MERIDIANS - 1;
+        $y = rand(0, self::TOTAL_PARALLELS - 1);
+        $direction = Direction::EAST;
+
+        $initialPosition = new Position($x, $y, $direction);
+
+        $positionRepository = $this->createMock(PositionRepository::class);
+
+        $obstacleRepository = $this->createMock(ObstacleRepository::class);
+        $obstacleRepository->method('getAll')
+            ->willReturn([]);
+
+        $marsRover = new MarsRover(
+            self::TOTAL_PARALLELS,
+            self::TOTAL_MERIDIANS,
+            $initialPosition,
+            $positionRepository,
+            $obstacleRepository
+        );
+
+        $marsRover->moveForward();
+
+        $expectedPosition = new Position(1, $y, $direction);
         $this->assertEquals($expectedPosition, $marsRover->getPosition());
     }
 

@@ -39,15 +39,15 @@ class MarsRover
                 break;
 
             case Direction::EAST:
-                $x = $this->position->x + 1;
-                $this->obstacleCheck($x, $this->position->y);
-                $this->position->x = $x;
+                $newPosition = $this->incrementX();
+                $this->obstacleCheck($newPosition->x, $newPosition->y);
+                $this->position = $newPosition;
                 break;
 
             case Direction::WEST:
-                $x = $this->position->x - 1;
-                $this->obstacleCheck($x, $this->position->y);
-                $this->position->x = $x;
+                $newPosition = $this->decrementX();
+                $this->obstacleCheck($newPosition->x, $newPosition->y);
+                $this->position = $newPosition;
                 break;
         }
     }
@@ -78,7 +78,7 @@ class MarsRover
         }
     }
 
-    private function decrementY(): Position
+    private function incrementX(): Position
     {
         $position = new Position(
             $this->position->x, 
@@ -86,22 +86,8 @@ class MarsRover
             $this->position->direction
         );
 
-        // If we are inside the planisphere, simply decrement the Y value
-        if($position->y > 0) {
-            $position->y--;
-            return $position;
-        }
-
-        // Else we are at the North Pole, aiming going even further north
-
-        // Calculate the antimeridian (approximate to the lower integer, in case we have odd total meridians)
-        $position->x = floor(($position->x + $this->totalMeridians / 2) % $this->totalMeridians);
-
-        // Increment the Y value, because now we are in the opposite part of the globe
-        $position->y++;
-
-        // Since now we are in the opposite part of the globe, we need to invert the direction where we are oriented
-        $position->direction = ($position->direction == Direction::NORTH) ? Direction::SOUTH : Direction::NORTH;
+        // Increment the X value, and calculate module if we are wrapping the planisphere
+        $position->x = ($position->x + 1) % ($this->totalMeridians - 1);
 
         return $position;
     }
@@ -125,8 +111,50 @@ class MarsRover
         // Calculate the antimeridian (approximate to the upper integer, in case we have odd total meridians)
         $position->x = ceil(($position->x + $this->totalMeridians / 2) % $this->totalMeridians);
 
-        // Increment the Y value, because now we are in the opposite part of the globe
+        // Decrement the Y value, because now we are in the opposite part of the globe
         $position->y--;
+
+        // Since now we are in the opposite part of the globe, we need to invert the direction where we are oriented
+        $position->direction = ($position->direction == Direction::NORTH) ? Direction::SOUTH : Direction::NORTH;
+
+        return $position;
+    }
+
+    private function decrementX(): Position
+    {
+        $position = new Position(
+            $this->position->x, 
+            $this->position->y, 
+            $this->position->direction
+        );
+
+        // Increment the X value, and calculate module if we are wrapping the planisphere
+        $position->x = ($position->x - 1) % $this->totalMeridians;
+
+        return $position;
+    }
+
+    private function decrementY(): Position
+    {
+        $position = new Position(
+            $this->position->x, 
+            $this->position->y, 
+            $this->position->direction
+        );
+
+        // If we are inside the planisphere, simply decrement the Y value
+        if($position->y > 0) {
+            $position->y--;
+            return $position;
+        }
+
+        // Else we are at the North Pole, aiming going even further north
+
+        // Calculate the antimeridian (approximate to the lower integer, in case we have odd total meridians)
+        $position->x = floor(($position->x + $this->totalMeridians / 2) % $this->totalMeridians);
+
+        // Increment the Y value, because now we are in the opposite part of the globe
+        $position->y++;
 
         // Since now we are in the opposite part of the globe, we need to invert the direction where we are oriented
         $position->direction = ($position->direction == Direction::NORTH) ? Direction::SOUTH : Direction::NORTH;
