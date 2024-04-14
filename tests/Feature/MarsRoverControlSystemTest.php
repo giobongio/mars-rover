@@ -26,7 +26,7 @@ class MarsRoverControlSystemTest extends TestCase
         config(['app.planisphere.total_meridians' => self::TOTAL_MERIDIANS]);
     }
 
-    public function test_sendCommands_getCommandResults(): void
+    public function test_sendCommands_allCommandsSucceed(): void
     {
         $x = 10;
         $y = 20;
@@ -56,7 +56,7 @@ class MarsRoverControlSystemTest extends TestCase
         $this->assertEquals($expectedResult, $actualResult);
     }
 
-    public function test_sendCommandsWithObstacles_getCommandResults(): void
+    public function test_sendCommandsWithObstacles_someCommandsFail(): void
     {
         $x = 10;
         $y = 20;
@@ -116,5 +116,73 @@ class MarsRoverControlSystemTest extends TestCase
         $actualPosition = $marsRover->getPosition();
 
         $this->assertEquals($expectedPosition, $actualPosition);
+    }
+
+    public function test_wrapNorth_allCommandsSucceed(): void
+    {
+        $x = 10;
+        $y = 1;
+        $direction = Direction::NORTH;
+
+        $positionRepository = $this->createMock(PositionRepository::class);
+        $obstacleRepository = $this->createMock(ObstacleRepository::class);
+
+        $marsRover = new MarsRover(
+            $positionRepository,
+            $obstacleRepository
+        );
+
+        $marsRover->setPosition(new Position($x, $y, $direction));
+        $marsRoverControlSystem = new MarsRoverControlSystem($marsRover);
+
+        $actualResult = $marsRoverControlSystem->wrap();
+
+        // The expected positions are voluntarily without any calculation (which could be error prone)
+        // Remember to update it if you change the self::TOTAL_MERIDIANS constant
+        $expectedResult = [];
+        
+        $expectedResult[] = new CommandResult(Command::MOVE_FORWARD, new Position(10, 0, Direction::NORTH), true);
+
+        for($currentY = 1; $currentY <= self::TOTAL_PARALLELS - 1; $currentY++) {
+            $expectedResult[] = new CommandResult(Command::MOVE_FORWARD, new Position(60, $currentY, Direction::SOUTH), true);
+        }
+
+        for($currentY = self::TOTAL_PARALLELS - 2; $currentY >= 1; $currentY--) {
+            $expectedResult[] = new CommandResult(Command::MOVE_FORWARD, new Position(10, $currentY, Direction::NORTH), true);
+        }
+        
+        $this->assertEquals($expectedResult, $actualResult);
+    }
+
+    public function test_wrapEast_allCommandsSucceed(): void
+    {
+        $x = self::TOTAL_MERIDIANS - 2;
+        $y = 3;
+        $direction = Direction::EAST;
+
+        $positionRepository = $this->createMock(PositionRepository::class);
+        $obstacleRepository = $this->createMock(ObstacleRepository::class);
+
+        $marsRover = new MarsRover(
+            $positionRepository,
+            $obstacleRepository
+        );
+
+        $marsRover->setPosition(new Position($x, $y, $direction));
+        $marsRoverControlSystem = new MarsRoverControlSystem($marsRover);
+
+        $actualResult = $marsRoverControlSystem->wrap();
+
+        // The expected positions are voluntarily without any calculation (which could be error prone)
+        // Remember to update it if you change the self::TOTAL_MERIDIANS constant
+        $expectedResult = [];
+        
+        $expectedResult[] = new CommandResult(Command::MOVE_FORWARD, new Position(0, 3, Direction::EAST), true);
+
+        for($currentX = 1; $currentX <= self::TOTAL_MERIDIANS - 2; $currentX++) {
+            $expectedResult[] = new CommandResult(Command::MOVE_FORWARD, new Position($currentX, 3, Direction::EAST), true);
+        }
+        
+        $this->assertEquals($expectedResult, $actualResult);
     }
 }

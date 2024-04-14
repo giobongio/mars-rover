@@ -67,7 +67,9 @@ class MarsRoverTest extends TestCase
         $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveForward();
 
-        $expectedPosition = new Position(floor(($x + self::TOTAL_MERIDIANS / 2) % self::TOTAL_MERIDIANS), 1, Direction::SOUTH);
+        // The expected position is voluntarily fixed to avoid any calculation (which could be error prone)
+        // Remember to update it if you change the self::TOTAL_MERIDIANS constant
+        $expectedPosition = new Position(51, 1, Direction::SOUTH);
         $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
@@ -113,7 +115,9 @@ class MarsRoverTest extends TestCase
         $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveForward();
 
-        $expectedPosition = new Position(ceil(($x + self::TOTAL_MERIDIANS / 2) % self::TOTAL_MERIDIANS), self::TOTAL_PARALLELS - 2, Direction::NORTH);
+        // The expected position is voluntarily fixed to avoid any calculation (which could be error prone)
+        // Remember to update it if you change the self::TOTAL_MERIDIANS constant
+        $expectedPosition = new Position(52, 98, Direction::NORTH);
         $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
@@ -145,7 +149,7 @@ class MarsRoverTest extends TestCase
     public function test_moveForwardEastAtEastBorder_getNewPosition(): void
     {
         $x = self::TOTAL_MERIDIANS - 1;
-        $y = rand(0, self::TOTAL_PARALLELS - 1);
+        $y = 3;
         $direction = Direction::EAST;
 
         $positionRepository = $this->createMock(PositionRepository::class);
@@ -159,7 +163,9 @@ class MarsRoverTest extends TestCase
         $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveForward();
 
-        $expectedPosition = new Position(1, $y, $direction);
+        // The expected position is voluntarily fixed to avoid any calculation (which could be error prone)
+        // Remember to update it if you change the self::TOTAL_PARALLELS constant
+        $expectedPosition = new Position(1, 3, Direction::EAST);
         $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);
@@ -191,7 +197,7 @@ class MarsRoverTest extends TestCase
     public function test_moveForwardWestAtWestBorder_getNewPosition(): void
     {
         $x = 0;
-        $y = rand(0, self::TOTAL_PARALLELS - 1);
+        $y = 2;
         $direction = Direction::WEST;
 
         $positionRepository = $this->createMock(PositionRepository::class);
@@ -205,7 +211,9 @@ class MarsRoverTest extends TestCase
         $marsRover->setPosition(new Position($x, $y, $direction));
         $actualResult = $marsRover->moveForward();
 
-        $expectedPosition = new Position(self::TOTAL_PARALLELS - 2, $y, $direction);
+        // The expected position is voluntarily fixed to avoid any calculation (which could be error prone)
+        // Remember to update it if you change the self::TOTAL_PARALLELS constant
+        $expectedPosition = new Position(98, 2, $direction);
         $expectedResult = new PositionResult($expectedPosition, true);
         
         $this->assertEquals($expectedResult, $actualResult);

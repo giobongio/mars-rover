@@ -28,13 +28,21 @@ class MarsRoverController extends Controller
             )
         );
         
-        return Response(null, Response::HTTP_OK);
+        return Response('ok', Response::HTTP_OK);
     }
 
     public function sendCommands(SendCommandsRequest $request): Response
     {
         $marsRoverControlSystem = App::make(MarsRoverControlSystemInterface::class);
         $result = $marsRoverControlSystem->sendCommands($request['commands']);
+        
+        return Response(DataHelper::toAssociativeArray($result), Response::HTTP_OK);
+    }
+
+    public function wrap(): Response
+    {
+        $marsRoverControlSystem = App::make(MarsRoverControlSystemInterface::class);
+        $result = $marsRoverControlSystem->wrap();
         
         return Response(DataHelper::toAssociativeArray($result), Response::HTTP_OK);
     }

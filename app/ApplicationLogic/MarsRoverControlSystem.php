@@ -54,22 +54,7 @@ class MarsRoverControlSystem implements MarsRoverControlSystemInterface
     public function wrap(): array
     {
         $commandResults = [];
-        $steps = 0;
-
         $initialPosition = $this->marsRover->getPosition();
-        
-        switch($initialPosition->direction) 
-        {
-            case Direction::NORTH:
-            case Direction::SOUTH:
-                $maxSteps = config('app.planisphere.total_parallels');
-                break;
-
-            case Direction::EAST:
-            case Direction::WEST:
-                $maxSteps = config('app.planisphere.total_meridians');
-                break;
-        }
 
         do {
             $positionResult = $this->marsRover->moveForward();
@@ -80,8 +65,7 @@ class MarsRoverControlSystem implements MarsRoverControlSystemInterface
                 $positionResult->success
             );
             
-            $steps++;
-        } while($steps < $maxSteps || $positionResult->success == false);
+        } while($positionResult->position != $initialPosition || $positionResult->success == false);
 
         return $commandResults;
     }
