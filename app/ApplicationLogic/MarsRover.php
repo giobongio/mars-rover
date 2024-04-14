@@ -3,10 +3,10 @@
 namespace App\ApplicationLogic;
 
 use App\Data\Position;
+use App\Data\CommandResult;
 use App\Enums\Direction;
 use App\Repositories\ObstacleRepository;
 use App\Repositories\PositionRepository;
-use Exception;
 
 class MarsRover
 {
@@ -19,63 +19,88 @@ class MarsRover
         private readonly PositionRepository $positionRepository,
         private readonly ObstacleRepository $obstacleRepository
     ) {
+
+        // Get obstacles in memory to perform faster than querying the repository
         $this->obstacles = $obstacleRepository->getAll();
     }
 
-    public function moveForward(): void
+    public function moveForward(): CommandResult
     {
         switch($this->position->direction) 
         {
             case Direction::NORTH:
                 $newPosition = $this->decrementY();
-                $this->obstacleCheck($newPosition->x, $newPosition->y);
-                $this->position = $newPosition;
                 break;
 
             case Direction::SOUTH:
                 $newPosition = $this->incrementY();
-                $this->obstacleCheck($newPosition->x, $newPosition->y);
-                $this->position = $newPosition;
                 break;
 
             case Direction::EAST:
                 $newPosition = $this->incrementX();
-                $this->obstacleCheck($newPosition->x, $newPosition->y);
-                $this->position = $newPosition;
                 break;
 
             case Direction::WEST:
                 $newPosition = $this->decrementX();
-                $this->obstacleCheck($newPosition->x, $newPosition->y);
-                $this->position = $newPosition;
                 break;
         }
+
+        if($this->existsObstacle($newPosition->x, $newPosition->y)) {
+            return new CommandResult($newPosition, false);
+        }
+
+        $this->positionRepository->save($newPosition);
+        $this->position = $newPosition;
+
+        return new CommandResult($newPosition, true);
     }
 
-    public function moveBackward(): void
+    public function moveBackward(): CommandResult
     {
+        switch($this->position->direction) 
+        {
+            case Direction::NORTH:
+                $newPosition = $this->incrementY();
+                break;
+
+            case Direction::SOUTH:
+                $newPosition = $this->decrementY();
+                break;
+
+            case Direction::EAST:
+                $newPosition = $this->decrementX();
+                break;
+
+            case Direction::WEST:
+                $newPosition = $this->incrementX();
+                break;
+        }
+
+        if($this->existsObstacle($newPosition->x, $newPosition->y)) {
+            return new CommandResult($newPosition, false);
+        }
+
+        $this->positionRepository->save($newPosition);
+        $this->position = $newPosition;
+
+        return new CommandResult($newPosition, true);
     }
 
-    public function rotateLeft(): void
+    public function rotateLeft(): CommandResult
     {
+        $newPosition = $this->position;
+        return new CommandResult($newPosition, true);
     }
 
-    public function rotateRight(): void
+    public function rotateRight(): CommandResult
     {
+        $newPosition = $this->position;
+        return new CommandResult($newPosition, true);
     }
 
     public function getPosition(): Position
     {
         return $this->position;
-    }
-
-    private function obstacleCheck(int $x, int $y): void
-    {
-        foreach($this->obstacles as $obstacle) {
-            if($obstacle->x == $x && $obstacle->y == $y) {
-                throw new Exception('Obstacle found at (x, y) = ('. $x . ',' . $y .'), cannot proceed.');
-            }
-        }
     }
 
     private function incrementX(): Position
@@ -128,8 +153,8 @@ class MarsRover
             $this->position->direction
         );
 
-        // Increment the X value, and calculate module if we are wrapping the planisphere
-        $position->x = ($position->x - 1) % $this->totalMeridians;
+        // Decrement the X value, and calculate module if we are wrapping the planisphere
+        $position->x = ($position->x - 1 + ($this->totalMeridians - 1)) % ($this->totalMeridians - 1);
 
         return $position;
     }
@@ -160,5 +185,16 @@ class MarsRover
         $position->direction = ($position->direction == Direction::NORTH) ? Direction::SOUTH : Direction::NORTH;
 
         return $position;
+    }
+
+    private function existsObstacle(int $x, int $y): bool
+    {
+        foreach($this->obstacles as $obstacle) {
+            if($obstacle->x == $x && $obstacle->y == $y) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
