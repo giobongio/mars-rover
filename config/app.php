@@ -135,7 +135,7 @@ return [
 
     'planisphere' => [
         'total_parallels' => 200,
-        'total_meridians' => 200,
+        'total_meridians' => 300,
     ],
 
 
