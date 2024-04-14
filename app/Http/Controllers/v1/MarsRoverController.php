@@ -36,7 +36,7 @@ class MarsRoverController extends Controller
         $marsRoverControlSystem = App::make(MarsRoverControlSystemInterface::class);
         $result = $marsRoverControlSystem->sendCommands($request['commands']);
         
-        return Response(DataHelper::toAssociativeArray($result), Response::HTTP_OK);
+        return Response(DataHelper::convertToAssociativeArray($result), Response::HTTP_OK);
     }
 
     public function wrap(): Response
@@ -44,6 +44,6 @@ class MarsRoverController extends Controller
         $marsRoverControlSystem = App::make(MarsRoverControlSystemInterface::class);
         $result = $marsRoverControlSystem->wrap();
         
-        return Response(DataHelper::toAssociativeArray($result), Response::HTTP_OK);
+        return Response(DataHelper::convertToAssociativeArray($result), Response::HTTP_OK);
     }
 }

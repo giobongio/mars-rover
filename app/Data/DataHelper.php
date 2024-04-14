@@ -4,13 +4,13 @@ namespace App\Data;
 
 trait DataHelper
 {
-    public static function toAssociativeArray(mixed $data): mixed
+    public static function convertToAssociativeArray(mixed $data): mixed
     {
         // Only process if it's an object or array being passed to the function
         if(is_object($data) || is_array($data)) {
             $dataArray = (array) $data;
             foreach($dataArray as &$dataItem) {
-                $dataItem = self::toAssociativeArray($dataItem);
+                $dataItem = self::convertToAssociativeArray($dataItem);
             }
 
             return $dataArray;
@@ -20,8 +20,13 @@ trait DataHelper
         return $data;
     }
 
-    public function jsonSerialize(): string|false
+    public static function jsonSerialize(object $data): string|false
     {
-        return json_encode(get_object_vars($this));
+        return json_encode(get_object_vars($data));
+    }
+
+    public static function boolToString(bool $data): string
+    {
+        return $data ? 'true' : 'false';
     }
 }
