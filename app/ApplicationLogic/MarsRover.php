@@ -15,8 +15,6 @@ class MarsRover implements MarsRoverInterface
     private ?Position $position = null;
 
     public function __construct(
-        private readonly int $totalParallels,
-        private readonly int $totalMeridians,
         private readonly PositionRepository $positionRepository,
         private readonly ObstacleRepository $obstacleRepository
     ) {
@@ -174,22 +172,27 @@ class MarsRover implements MarsRoverInterface
 
     private function incrementX(): Position
     {
+        $totalMeridians = config('app.planisphere.total_meridians');
+
         // Clone current position to avoid to change it
         $position = $this->position->clone();
 
         // Increment the X value, and calculate module if we are wrapping the planisphere
-        $position->x = ($position->x + 1) % ($this->totalMeridians - 1);
+        $position->x = ($position->x + 1) % ($totalMeridians - 1);
 
         return $position;
     }
 
     private function incrementY(): Position
     {
+        $totalParallels = config('app.planisphere.total_parallels');
+        $totalMeridians = config('app.planisphere.total_meridians');
+
         // Clone current position to avoid to change it
         $position = $this->position->clone();
 
         // If we are inside the planisphere, simply increment the Y value
-        if($position->y < $this->totalParallels - 1) {
+        if($position->y < $totalParallels - 1) {
             $position->y++;
             return $position;
         }
@@ -197,7 +200,7 @@ class MarsRover implements MarsRoverInterface
         // Else we are at the South Pole, aiming going even further south
 
         // Calculate the antimeridian (approximate to the upper integer, in case we have odd total meridians)
-        $position->x = ceil(($position->x + $this->totalMeridians / 2) % $this->totalMeridians);
+        $position->x = ceil(($position->x + $totalMeridians / 2) % $totalMeridians);
 
         // Decrement the Y value, because now we are in the opposite part of the globe
         $position->y--;
@@ -210,17 +213,21 @@ class MarsRover implements MarsRoverInterface
 
     private function decrementX(): Position
     {
+        $totalMeridians = config('app.planisphere.total_meridians');
+
         // Clone current position to avoid to change it
         $position = $this->position->clone();
 
         // Decrement the X value, and calculate module if we are wrapping the planisphere
-        $position->x = ($position->x - 1 + ($this->totalMeridians - 1)) % ($this->totalMeridians - 1);
+        $position->x = ($position->x - 1 + ($totalMeridians - 1)) % ($totalMeridians - 1);
 
         return $position;
     }
 
     private function decrementY(): Position
     {
+        $totalMeridians = config('app.planisphere.total_meridians');
+
         // Clone current position to avoid to change it
         $position = $this->position->clone();
 
@@ -233,7 +240,7 @@ class MarsRover implements MarsRoverInterface
         // Else we are at the North Pole, aiming going even further north
 
         // Calculate the antimeridian (approximate to the lower integer, in case we have odd total meridians)
-        $position->x = floor(($position->x + $this->totalMeridians / 2) % $this->totalMeridians);
+        $position->x = floor(($position->x + $totalMeridians / 2) % $totalMeridians);
 
         // Increment the Y value, because now we are in the opposite part of the globe
         $position->y++;

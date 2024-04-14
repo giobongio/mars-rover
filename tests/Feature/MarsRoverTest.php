@@ -17,6 +17,14 @@ class MarsRoverTest extends TestCase
     private const TOTAL_PARALLELS = 100;
     private const TOTAL_MERIDIANS = 100;
 
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        config(['app.planisphere.total_parallels' => self::TOTAL_PARALLELS]);
+        config(['app.planisphere.total_meridians' => self::TOTAL_MERIDIANS]);
+    }
+
     // Move forward 
 
     public function test_moveForwardNorthInsidePlanisphere_getNewPosition(): void
@@ -29,8 +37,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -54,8 +60,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -79,8 +83,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -104,8 +106,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -129,8 +129,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -154,8 +152,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -179,8 +175,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -204,8 +198,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -231,8 +223,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -256,8 +246,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -281,8 +269,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -306,8 +292,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -331,8 +315,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -357,8 +339,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -382,8 +362,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -408,8 +386,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -439,8 +415,6 @@ class MarsRoverTest extends TestCase
             ]);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -469,8 +443,6 @@ class MarsRoverTest extends TestCase
             ]);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -496,8 +468,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -523,8 +493,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -546,8 +514,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -562,8 +528,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -578,8 +542,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -594,8 +556,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -614,8 +574,6 @@ class MarsRoverTest extends TestCase
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );

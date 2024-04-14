@@ -3,6 +3,7 @@
 use App\Http\Controllers\v1\MarsRoverController;
 use Illuminate\Support\Facades\Route;
 
+Route::post('/v1/marsrover/setPosition', [MarsRoverController::class, 'setPosition']);
 Route::post('/v1/marsrover/sendCommands', [MarsRoverController::class, 'sendCommands']);
 
 //Route::get('/user', function (Request $request) {

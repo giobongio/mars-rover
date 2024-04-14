@@ -17,20 +17,24 @@ class MarsRoverControlSystemTest extends TestCase
     private const TOTAL_PARALLELS = 100;
     private const TOTAL_MERIDIANS = 100;
 
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        config(['app.planisphere.total_parallels' => self::TOTAL_PARALLELS]);
+        config(['app.planisphere.total_meridians' => self::TOTAL_MERIDIANS]);
+    }
+
     public function test_sendCommands_getCommandResults(): void
     {
         $x = 10;
         $y = 20;
         $direction = Direction::NORTH;
 
-        $initialPosition = new Position($x, $y, $direction);
-
         $positionRepository = $this->createMock(PositionRepository::class);
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -65,8 +69,6 @@ class MarsRoverControlSystemTest extends TestCase
             ]);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );
@@ -102,8 +104,6 @@ class MarsRoverControlSystemTest extends TestCase
             ]);
 
         $marsRover = new MarsRover(
-            self::TOTAL_PARALLELS,
-            self::TOTAL_MERIDIANS,
             $positionRepository,
             $obstacleRepository
         );

@@ -19,8 +19,6 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(MarsRoverInterface::class, function () {
             return new MarsRover(
-                config('app.planisphere.total_parallels'),
-                config('app.planisphere.total_meridians'),
                 new PositionRepository(),
                 new ObstacleRepository()
             );
