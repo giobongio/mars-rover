@@ -594,15 +594,18 @@ class MarsRoverTest extends TestCase
         $this->assertEquals($expectedPosition, $actualPosition);
     }
 
-    // Last position
-
     public function test_construct_getLastPosition(): void
     {
         $x = rand(0, self::TOTAL_MERIDIANS - 1);
         $y = rand(0, self::TOTAL_PARALLELS - 1);
-        $direction = Direction::WEST;
+        $direction = Direction::NORTH;
+        
+        $expectedPosition = new Position($x, $y, $direction);
 
         $positionRepository = $this->createMock(PositionRepository::class);
+        $positionRepository->method('getLast')
+            ->willReturn($expectedPosition);
+
         $obstacleRepository = $this->createMock(ObstacleRepository::class);
 
         $marsRover = new MarsRover(
@@ -610,9 +613,6 @@ class MarsRoverTest extends TestCase
             $obstacleRepository
         );
 
-        $expectedPosition = new Position($x, $y, $direction);
-
-        $marsRover->setPosition($expectedPosition);
         $actualPosition = $marsRover->getPosition();
 
         $this->assertEquals($expectedPosition, $actualPosition);
