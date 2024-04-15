@@ -20,7 +20,7 @@ class MarsRoverController extends Controller
     {
         $marsRoverControlSystem = App::make(MarsRoverControlSystemInterface::class);
         
-        $marsRoverControlSystem->setPosition(
+        $result = $marsRoverControlSystem->setPosition(
             new Position(
                 $request['x'], 
                 $request['y'], 
@@ -28,7 +28,7 @@ class MarsRoverController extends Controller
             )
         );
         
-        return Response(['success' => true], Response::HTTP_OK);
+        return Response(['success' => $result], Response::HTTP_OK);
     }
 
     public function sendCommands(SendCommandsRequest $request): Response
