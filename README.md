@@ -88,6 +88,7 @@ The goal of this API is to set the Mars rover position on the grid. If an obstac
       "success": false
     }
 
+<br/>
 
 ### sendCommands
 The goal of this API is to send a list of commands the Mars rover. Commands may move forward and backward (`f,b`), turn left and right (`l,r`) the rover. The execution lasts until the command list is completed, or an obstacle is found. In both cases, the history of commands performed is returned, and the success/failure for each command is reported. 
@@ -144,6 +145,8 @@ Before sending commands, it's required to have set the initial position of the r
         "success": false
       }
     ]
+<br/>
+
 
 ### wrap
 The goal of this API is to perform wrapping of the planet: starting from the current position, move forward until the circumnavigation of the planet is complete, or when an obstacle is found on the surface. In this case, the rover moves up to the last possible point, aborts the sequence and reports the obstacle. In both cases, the history of commands performed is returned, and the success/failure for each command is reported. 
