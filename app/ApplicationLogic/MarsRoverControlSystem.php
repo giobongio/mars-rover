@@ -70,9 +70,9 @@ class MarsRoverControlSystem implements MarsRoverControlSystemInterface
         return $commandResults;
     }
 
-    public function setPosition(Position $position): void
+    public function setPosition(Position $position): bool
     {
-        $this->marsRover->setPosition($position);
+        return $this->marsRover->setPosition($position);
     }
 
     public function getPosition(): Position

@@ -158,11 +158,17 @@ class MarsRover implements MarsRoverInterface
         return new PositionResult($newPosition, true);
     }
 
-    public function setPosition(Position $newPosition): void
+    public function setPosition(Position $newPosition): bool
     {
+        if($this->existsObstacle($newPosition->x, $newPosition->y)) {
+            return false;
+        }
+
         // Update repository to keep its value consistent with class data
         $this->positionRepository->save($newPosition);
         $this->position = $newPosition;
+
+        return true;
     }
 
     public function getPosition(): ?Position

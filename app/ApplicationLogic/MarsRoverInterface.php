@@ -11,6 +11,6 @@ interface MarsRoverInterface
     public function moveBackward(): PositionResult;
     public function rotateLeft(): PositionResult;
     public function rotateRight(): PositionResult;
-    public function setPosition(Position $position): void;
+    public function setPosition(Position $position): bool;
     public function getPosition(): ?Position;
 }
