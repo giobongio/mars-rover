@@ -2,7 +2,7 @@
 
 The goal of this application is to create an API that translates the commands sent from Earth to instructions understood by a rover which is exploring the surface of Mars. 
 
-## Mars Surface projection
+### Mars Surface projection
 
 Mars is thought as a sphere. It's surface is projected to a bidimensional grid of `M` meridians and `P` parallels, by using the Mercator's modified centrographic cylindrical projection. In this representation:
 - The origin (`0,0`) is set at the top left corner for convenience
@@ -16,7 +16,7 @@ Mars is thought as a sphere. It's surface is projected to a bidimensional grid o
 - When we are at the top border and move up, we come out at the top border, going down on the antimeridian of the original meridian
 - When we are at the bottom border and move down, we come out at the bottom border, going up on the antimeridian of the original meridian
 
-## Rover capabilities
+### Rover capabilities
 
 The Mars rover has the following capabilities:
 
@@ -61,7 +61,7 @@ The application needs a list minimum requirements to work correctly:
 
 The application exposes 3 APIs to perform operations on Mars rover.
 
-## setPosition
+### setPosition
 The goal of this API is to set the Mars rover position on the grid. If an obstacle is present on the required position, the operation doesn't succeed.
 
 **Verb**
@@ -89,7 +89,7 @@ The goal of this API is to set the Mars rover position on the grid. If an obstac
     }
 
 
-## sendCommands
+### sendCommands
 The goal of this API is to send a list of commands the Mars rover. Commands may move forward and backward (`f,b`), turn left and right (`l,r`) the rover. The execution lasts until the command list is completed, or an obstacle is found. In both cases, the history of commands performed is returned, and the success/failure for each command is reported. 
 Before sending commands, it's required to have set the initial position of the rover, otherwise an error is returned.
 
@@ -145,7 +145,7 @@ Before sending commands, it's required to have set the initial position of the r
       }
     ]
 
-## wrap
+### wrap
 The goal of this API is to perform wrapping of the planet: starting from the current position, move forward until the circumnavigation of the planet is complete, or when an obstacle is found on the surface. In this case, the rover moves up to the last possible point, aborts the sequence and reports the obstacle. In both cases, the history of commands performed is returned, and the success/failure for each command is reported. 
 Before requiring wrap, it's required to have set the initial position of the rover, otherwise an error is returned.
 
@@ -206,19 +206,19 @@ Before requiring wrap, it's required to have set the initial position of the rov
 
 The application is developed in PHP, using Laravel engine. Laravel has been chosen because it's a framework which provides very handy built-in functionalities to manage API routes, validate requests, handle authentication, create classes, perform tests, resolve dependencies, abstract database, seed tables, manage migrations.
 
-**Data flow**
+### Data flow
 When an API endpoint is invoked, the controller addressed from the API routing is called. The request is automatically validated to ensure that body is correct. At the moment we have only `MarsRoverController`. 
 The controller resolves the `MarsRoverControlSystemInterface`, which is the class that handles the commands sent to the rover. This translates the commands received from the Earth to basic commands (move forward, move backward, rotate left, rotate right) which can be executed from the rover. Then it resolves the `MarsRoverInterface` and requires the specific command. 
 The Mars rover class tries to execute the command and, in case of success, persists the data by using the `PositionRepository`. At the moment, data storage is database, but since we are using a repository we have decoupled this dependency. On creation, the rover tries to retrieve the last position, to set its internal data. If no data is available, we will need to set it before executing instructions.
 
-**Database**
+### Database
 The application relies on data stored on database, with the following tables:
 
  - **positions**: contains the list of successful positions (coordinates and direction) of the rover
  - **obstacles**: contains the list of obstacles in the grid (coordinates)
 
 
-**Architecture**
+### Architecture
 The application has the following architecture:
 
 - **ApplicationLogic**: contains all the application logic classes (like Mars rover)
@@ -229,14 +229,15 @@ The application has the following architecture:
 - **Providers**: contains the providers used to register and resolve dependencies
 - **Repositories**: contains the list of repositories, allows to abstract the data storage
 
-## Tests
+### Tests
 
 The application is provided with unit and feature tests, to guarantee the quality of the code. At the moment, we have a coverage **over 98%**, with a 100% on most important application logic classes (Mars rover).
 
 
-## Next steps
-
+### Next steps
 There are some actions we can perform to improve the current implementation:
 
-- **Add authentication to APIs**: we don't want that some joker from Earth may send commands to the rover. For this reason, we need to implement an authentication mechanism, API request are accepted only if provided with a valid Authentication header with a JWT generated from the app or an Authentication Server (Oauth 2.0)
-- **Create history API**: create an API that returns the complete history of commands executed successfully from the rover
+- **Use Docker**: move the infrastructure (web server, PHP installation, database engine, Laravel) to Docker, to avoid efforts to install all of them to run the application
+-  **Add authentication**: we don't want that some joker from Earth may send commands to the rover. For this reason, we need to implement an authentication mechanism, API request are accepted only if provided with a valid Authentication header with a JWT generated from the app or an Authentication Server (Oauth 2.0)
+- **Return history**: create an API that returns the complete history of commands executed successfully from the rover
+- **Store errors**: the rover doesn't prior know the distribution of obstacles. It could be interesting to store the list of obstacles found and to return them on request
