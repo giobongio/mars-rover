@@ -213,17 +213,11 @@ If this is the first endpoint invoked, before running the API it's required to s
 The application is developed in PHP, using Laravel framework. Laravel has been chosen because provides very handy built-in functionalities to manage API routes, validate requests, handle authentication, create classes, perform tests, resolve dependencies, abstract database, seed tables, manage migrations.
 
 ### Data flow
-When an API endpoint is invoked, its request is first validated (following some validation rules), to ensure that body is correct. If the request is correct, the controller addressed from the API routing is called.  At the moment we have only `MarsRoverController`. 
-The controller resolves the `MarsRoverControlSystemInterface`, which is an entity that handles the commands sent to the rover. This translates the commands received to basic commands (move forward, move backward, rotate left, rotate right) executed from the rover. 
-When commands are translated, the `MarsRoverInterface` is resolved and the rover instance is created. On creation, rover tries to retrieve the last successful position (if any). If no positions are available, it's required to set rover initial position.
-Now it's time to run the required command. If the command succeeds, the rover persists the last position by using the `PositionRepository`. At the moment, data storage is database, but since we are using a repository we have decoupled this dependency. 
+When an API endpoint is invoked, its request is first validated (following some validation rules), to ensure that body is correct. If the request is correct, the controller addressed from the API routing is called.  At the moment we have only `MarsRoverController`.<br/> 
+The controller resolves the `MarsRoverControlSystemInterface`, which is an entity that handles the commands sent to the rover. This translates the commands received to basic commands (move forward, move backward, rotate left, rotate right) executed from the rover.<br/> 
+When commands are translated, the `MarsRoverInterface` is resolved and the rover instance is created. On creation, rover tries to retrieve the last successful position (if any). If no positions are available, it's required to set rover initial position.<br/>
+Now it's time to run the required command. If the command succeeds, the rover persists the last position by using the `PositionRepository`. At the moment, data storage is database, but since we are using a repository we have decoupled this dependency.<br/> 
 When the command is executed, the result is returned and reported to the caller as an HTTP response.
-
-### Database
-The application relies on data stored on database, with the following tables:
-
- - **positions**: contains the list of successful positions (coordinates and direction) of the rover
- - **obstacles**: contains the list of obstacles in the grid (coordinates), created randomly during the installation
 
 
 ### Architecture
@@ -236,6 +230,14 @@ The application has the following architecture:
 - **Models**: contains the models which represent data on database
 - **Providers**: contains the providers used to register and resolve dependencies
 - **Repositories**: contains the list of repositories, allows to abstract the data storage
+
+
+### Database structure
+The application relies on data stored on database, with the following tables:
+
+ - **positions**: contains the list of successful positions (coordinates and direction) of the rover
+ - **obstacles**: contains the list of obstacles in the grid (coordinates), created randomly during the installation
+
 
 ### Tests
 
