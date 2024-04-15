@@ -59,7 +59,7 @@ The application needs a list minimum requirements to work correctly:
 
 # Usage
 
-The application exposes 3 APIs to perform operations on Mars rover.
+The application exposes 3 APIs to perform operations on Mars rover. The Postman collection to perform the invocations is provided in the `postman` folder.
 
 ### setPosition
 The goal of this API is to set the Mars rover position on the grid. If an obstacle is present on the required position, the operation doesn't succeed.
