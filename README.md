@@ -4,7 +4,7 @@ The goal of this application is to create an API that translates the commands se
 
 ### Mars Surface projection
 
-Mars is thought as a sphere. It's surface is projected to a bidimensional grid of `M` meridians and `P` parallels, by using the Mercator's modified centrographic cylindrical projection. In this representation:
+Mars is thought as a sphere. It's surface is projected to a bidimensional grid of `M` meridians and `P` parallels, by using the a cylindrical projection. In this representation:
 - The origin (`0, 0`) is set at the top left corner for convenience
 - The right bottom corner is the point with coordinates `(x,y) = (M-1, P-1)`
 - Points laying on the right border of the grid correspond to the points at the left border of the grid
